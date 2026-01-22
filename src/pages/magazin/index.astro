@@ -1,0 +1,401 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import { getPublishedArticles } from '../../lib/articles';
+import { projects } from '../../lib/projects';
+import { formatDate } from '../../lib/utils';
+
+const allArticles = await getPublishedArticles();
+const allProjects = projects.map(p => p.slug);
+
+// Normalize and deduplicate tags (case-insensitive)
+const tagMap = new Map<string, string>();
+// Special tag transformations
+const tagTransformations: Record<string, string> = {
+  'skaut': 'Skauti',
+};
+
+allArticles.forEach(article => {
+  article.tags?.forEach(tag => {
+    const normalized = tag.trim();
+    if (normalized) {
+      const normalizedLower = normalized.toLowerCase();
+      // Check for special transformations first
+      const transformed = tagTransformations[normalizedLower] || normalized;
+      // Use the first occurrence's casing (prefer capitalized)
+      const existing = Array.from(tagMap.values()).find(t => t.toLowerCase() === transformed.toLowerCase());
+      if (!existing) {
+        // Use transformation if available, otherwise capitalize
+        const finalTag = tagTransformations[normalizedLower] || (transformed.charAt(0).toUpperCase() + transformed.slice(1).toLowerCase());
+        tagMap.set(transformed.toLowerCase(), finalTag);
+      }
+    }
+  });
+});
+const allTags = Array.from(tagMap.values()).sort();
+
+// Categorize tags
+const tagCategories = {
+  'Časové období': ['Druhá světová válka', '20. století', '50. léta'],
+  'Témata': ['Paměť', 'Holocaust', 'Nacismus', 'Politické procesy', 'Soužití', 'Stolpersteine'],
+  'Skupiny': ['Němci', 'Češi', 'Skauti'],
+};
+
+// Organize tags into categories
+const categorizedTags: Record<string, string[]> = {
+  'Časové období': [],
+  'Témata': [],
+  'Skupiny': [],
+};
+
+allTags.forEach(tag => {
+  for (const [category, keywords] of Object.entries(tagCategories)) {
+    if (keywords.some(keyword => tag.toLowerCase().includes(keyword.toLowerCase()) || keyword.toLowerCase().includes(tag.toLowerCase()))) {
+      categorizedTags[category].push(tag);
+      break;
+    }
+  }
+});
+
+// Remove empty categories
+Object.keys(categorizedTags).forEach(key => {
+  if (categorizedTags[key].length === 0) {
+    delete categorizedTags[key];
+  }
+});
+
+// Get filter params from URL
+const url = Astro.url;
+const projectFilter = url.searchParams.get('project') || '';
+const tagFilter = url.searchParams.get('tag') || '';
+const searchQuery = url.searchParams.get('search') || '';
+
+// Filter articles
+let filteredArticles = allArticles;
+
+if (projectFilter) {
+  filteredArticles = filteredArticles.filter(a => a.project === projectFilter);
+}
+
+if (tagFilter) {
+  filteredArticles = filteredArticles.filter(a => a.tags.includes(tagFilter));
+}
+
+if (searchQuery) {
+  const query = searchQuery.toLowerCase();
+  filteredArticles = filteredArticles.filter(a => 
+    a.title.toLowerCase().includes(query) || 
+    a.excerpt.toLowerCase().includes(query)
+  );
+}
+---
+
+<BaseLayout 
+  title="Magazín - Memoriae Loci" 
+  description="Objevte příběhy míst, která dokumentujeme"
+>
+  <Navigation />
+  
+  <main class="pt-16 min-h-screen">
+    <!-- Header -->
+    <section class="bg-slate-900 py-12">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-50 mb-4">Magazín</h1>
+        <p class="text-slate-300 text-lg max-w-2xl">
+          Objevte příběhy míst, která dokumentujeme. Každé místo má svou historii, která stojí za to vyprávět.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Filters -->
+    <section class="bg-slate-950 py-8 border-b border-slate-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-4">
+          <!-- Search Row -->
+          <div class="flex flex-col md:flex-row gap-4 items-center">
+            <!-- Search -->
+            <div class="flex-1 w-full">
+              <input 
+                type="text" 
+                id="search-input"
+                placeholder="Hledat články..." 
+                value={searchQuery}
+                class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent"
+              />
+            </div>
+            
+            <!-- Toggle Filters Button -->
+            <button 
+              id="toggle-filters-btn"
+              class="px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors flex items-center gap-2 whitespace-nowrap"
+            >
+              <span>Filtry</span>
+              <svg id="toggle-filters-icon" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Collapsible Filters -->
+          <div id="filters-content" class="hidden space-y-6">
+            <!-- Project Filter -->
+            <div>
+              <label class="block text-sm font-semibold text-slate-400 uppercase tracking-wide mb-2">Projekt</label>
+              <select 
+                id="project-filter"
+                class="w-full md:w-auto px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 focus:outline-none focus:ring-2 focus:ring-accent min-w-[200px]"
+              >
+                <option value="">Všechny projekty</option>
+                {projects.map(project => (
+                  <option value={project.slug} selected={projectFilter === project.slug}>
+                    {project.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            
+            <!-- Tag Filters by Category -->
+            <div class="space-y-4">
+              {Object.entries(categorizedTags).map(([category, tags]) => (
+                <div class="space-y-2">
+                  <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wide">{category}</h3>
+                  <div class="flex flex-wrap gap-2">
+                    {tags.map(tag => (
+                      <button 
+                        data-tag={tag}
+                        class={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                          tagFilter === tag
+                            ? 'bg-accent text-slate-950'
+                            : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                        }`}
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Articles Grid -->
+    <section class="py-12 bg-slate-950">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        {filteredArticles.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articles-grid">
+            {filteredArticles.map((article) => (
+              <a 
+                href={`/magazin/${article.slug}`}
+                class="group bg-slate-900 rounded-lg overflow-hidden hover:bg-slate-800 transition-all duration-300"
+              >
+                <div class="aspect-video overflow-hidden">
+                  <img 
+                    src={(() => {
+                      const img = article.coverImage && article.coverImage.trim();
+                      if (!img || img === '/images/placeholder.svg' || img === '/images/liberec.png' || img === '/images/articles/example.jpg') {
+                        return '/images/liberec-hero.webp';
+                      }
+                      return img;
+                    })()} 
+                    alt={article.title}
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center gap-4 text-sm text-slate-400 mb-2">
+                    <span>{formatDate(article.publishedAt)}</span>
+                    {article.project && (
+                      <span class="px-2 py-1 bg-slate-800 rounded text-xs">
+                        {projects.find(p => p.slug === article.project)?.name || article.project}
+                      </span>
+                    )}
+                  </div>
+                  <h2 class="text-xl font-bold text-slate-50 mb-3 group-hover:text-accent transition-colors">
+                    {article.title}
+                  </h2>
+                  <p class="text-slate-300 text-sm line-clamp-3 mb-4">{article.excerpt}</p>
+                  {article.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-2">
+                      {article.tags.slice(0, 3).map(tag => (
+                        <span class="text-xs px-2 py-1 bg-slate-800 text-slate-400 rounded">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-12">
+            <p class="text-slate-400 text-lg">Žádné články nenalezeny.</p>
+          </div>
+        )}
+      </div>
+    </section>
+    
+    <!-- Partneři vybraných akcí Section -->
+    <section class="relative py-16 bg-slate-950">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl">
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-50 mb-8 uppercase tracking-wide">
+            Partneři vybraných akcí
+          </h2>
+          <div class="flex flex-wrap items-center gap-8 md:gap-12">
+            <!-- Liberecký kraj logo -->
+            <a 
+              href="https://www.kraj-lbc.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="/images/logo-liberecky-kraj.png" 
+                alt="Liberecký kraj"
+                class="h-12 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <!-- Krajská vědecká knihovna v Liberci logo -->
+            <a 
+              href="https://www.kvkli.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="/images/logo-kvkli.svg" 
+                alt="Krajská vědecká knihovna v Liberci"
+                class="h-12 opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <!-- FP TUL logo -->
+            <a 
+              href="https://www.fp.tul.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="https://www.fp.tul.cz/templates/yootheme/cache/d8/FP-znacka-d8bb453b.png" 
+                alt="Fakulta přírodovědně-humanitní a pedagogická TUL"
+                class="h-12 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <!-- Academia logo -->
+            <a 
+              href="https://www.academiaknihy.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="https://www.academiaknihy.cz/public/dist/images/header-logo-cz--inverse.svg" 
+                alt="Nakladatelství Academia"
+                class="h-12 opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <!-- Liberecký kraj logo (bílé) -->
+            <a 
+              href="https://www.kraj-lbc.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="/images/logo-liberecky-kraj-6-bile.png" 
+                alt="Liberecký kraj"
+                class="h-20 opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+  
+  <script>
+    const searchInput = document.getElementById('search-input');
+    const projectFilter = document.getElementById('project-filter');
+    const tagButtons = document.querySelectorAll('[data-tag]');
+    const toggleFiltersBtn = document.getElementById('toggle-filters-btn');
+    const filtersContent = document.getElementById('filters-content');
+    const toggleFiltersIcon = document.getElementById('toggle-filters-icon');
+    
+    // Toggle filters visibility
+    toggleFiltersBtn?.addEventListener('click', () => {
+      if (filtersContent) {
+        const isHidden = filtersContent.classList.contains('hidden');
+        if (isHidden) {
+          filtersContent.classList.remove('hidden');
+          if (toggleFiltersIcon) {
+            toggleFiltersIcon.style.transform = 'rotate(180deg)';
+          }
+        } else {
+          filtersContent.classList.add('hidden');
+          if (toggleFiltersIcon) {
+            toggleFiltersIcon.style.transform = 'rotate(0deg)';
+          }
+        }
+      }
+    });
+    
+    // Auto-expand if filters are active
+    const urlParams = new URLSearchParams(window.location.search);
+    if ((urlParams.get('project') || urlParams.get('tag')) && filtersContent) {
+      filtersContent.classList.remove('hidden');
+      if (toggleFiltersIcon) {
+        toggleFiltersIcon.style.transform = 'rotate(180deg)';
+      }
+    }
+    
+    function updateFilters() {
+      const params = new URLSearchParams();
+      
+      if (searchInput?.value) {
+        params.set('search', searchInput.value);
+      }
+      
+      if (projectFilter?.value) {
+        params.set('project', projectFilter.value);
+      }
+      
+      const activeTag = Array.from(tagButtons).find(btn => 
+        btn.classList.contains('bg-accent')
+      );
+      if (activeTag) {
+        params.set('tag', activeTag.getAttribute('data-tag') || '');
+      }
+      
+      window.location.href = `/magazin${params.toString() ? '?' + params.toString() : ''}`;
+    }
+    
+    searchInput?.addEventListener('input', (e) => {
+      clearTimeout(window.searchTimeout);
+      window.searchTimeout = setTimeout(updateFilters, 500);
+    });
+    
+    projectFilter?.addEventListener('change', updateFilters);
+    
+    tagButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag');
+        const params = new URLSearchParams(window.location.search);
+        
+        if (params.get('tag') === tag) {
+          params.delete('tag');
+        } else {
+          params.set('tag', tag || '');
+        }
+        
+        window.location.href = `/magazin${params.toString() ? '?' + params.toString() : ''}`;
+      });
+    });
+  </script>
+</BaseLayout>

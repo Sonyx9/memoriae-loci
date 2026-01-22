@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout 
+  title="O nás - Memoriae Loci" 
+  description="O neziskové organizaci Memoriae Loci a našem poslání"
+>
+  <Navigation />
+  
+  <main class="pt-16 min-h-screen">
+    <!-- Hero -->
+    <section class="bg-slate-900 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-5xl md:text-6xl font-bold text-slate-50 mb-6">O nás</h1>
+        <p class="text-xl text-slate-300 max-w-3xl">
+          Memoriae Loci je nezisková organizace zaměřená na dokumentaci a zachování příběhů míst, která mají historický a kulturní význam.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Mission -->
+    <section class="bg-slate-950 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-slate-50 mb-6">Naše mise</h2>
+          <div class="prose prose-invert prose-lg max-w-none space-y-4">
+            <p class="text-slate-200 text-lg leading-relaxed">
+              Věříme, že každé místo má svůj příběh, který stojí za to vyprávět. Naším cílem je dokumentovat historii a příběhy míst, která mají význam pro naši kulturu a společnost.
+            </p>
+            <p class="text-slate-200 text-lg leading-relaxed">
+              Snažíme se zachytit tyto příběhy dříve, než zmizí z kolektivní paměti, a zpřístupnit je široké veřejnosti prostřednictvím našich projektů a článků.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Methodology -->
+    <section class="bg-slate-900 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-slate-50 mb-6">Metodika</h2>
+          <div class="space-y-6">
+            <div class="bg-slate-800 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-slate-50 mb-3">Výzkum</h3>
+              <p class="text-slate-300">
+                Důkladný výzkum historických pramenů, archivních materiálů a rozhovorů s pamětníky.
+              </p>
+            </div>
+            <div class="bg-slate-800 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-slate-50 mb-3">Dokumentace</h3>
+              <p class="text-slate-300">
+                Fotografická a textová dokumentace míst v jejich současném stavu.
+              </p>
+            </div>
+            <div class="bg-slate-800 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-slate-50 mb-3">Prezentace</h3>
+              <p class="text-slate-300">
+                Zpřístupnění dokumentovaných příběhů prostřednictvím webu a dalších médií.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Team -->
+    <section class="bg-slate-950 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-slate-50 mb-8 text-center">Tým</h2>
+        <div class="max-w-3xl mx-auto">
+          <p class="text-slate-300 text-center mb-8">
+            Memoriae Loci tvoří tým dobrovolníků, kteří se věnují dokumentaci a zachování příběhů míst.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,203 @@
+---
+import { projects } from '../lib/projects';
+
+const currentPath = Astro.url.pathname;
+const navItems = [
+  { href: '/magazin', label: 'Magazín' },
+  { href: '/nase-vize', label: 'Naše vize' },
+  { href: '/podporte-nas', label: 'Podpořte nás' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/30 backdrop-blur-sm border-b border-slate-50/20">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="/" class="flex items-center space-x-3 group">
+        <img 
+          src="/images/logo.png" 
+          alt="Paměť místa" 
+          class="h-12 w-auto brightness-0 invert drop-shadow-lg transition-all group-hover:opacity-90 group-hover:scale-105"
+        />
+      </a>
+      
+      <div class="hidden md:flex items-center space-x-1">
+        <!-- Projekty Dropdown -->
+        <div class="relative group" id="projects-dropdown">
+          <button
+            class={`px-4 py-2 text-sm font-medium uppercase transition-colors relative flex items-center gap-1 ${
+              currentPath.startsWith('/projekty') || currentPath.startsWith('/ve-jmenu-lilie')
+                ? 'text-accent'
+                : 'text-slate-300 hover:text-slate-50'
+            }`}
+          >
+            Projekty
+            {(currentPath.startsWith('/projekty') || currentPath.startsWith('/ve-jmenu-lilie')) && (
+              <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"></span>
+            )}
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="absolute top-full left-0 mt-1 w-64 bg-slate-900/95 backdrop-blur-sm border border-slate-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="py-2">
+              <a
+                href="/projekty"
+                class={`block px-4 py-2 text-sm font-medium transition-colors ${
+                  currentPath === '/projekty'
+                    ? 'text-accent bg-slate-800'
+                    : 'text-slate-300 hover:text-slate-50 hover:bg-slate-800'
+                }`}
+              >
+                Všechny projekty
+              </a>
+              <div class="border-t border-slate-700 my-1"></div>
+              {projects.map((project) => {
+                const projectUrl = project.externalUrl || `/projekty/${project.slug}`;
+                const isProjectActive = currentPath === projectUrl || currentPath.startsWith(`/projekty/${project.slug}`) || currentPath === project.externalUrl;
+                const isExternalUrl = project.externalUrl && (project.externalUrl.startsWith('http://') || project.externalUrl.startsWith('https://'));
+                return (
+                  <a
+                    href={projectUrl}
+                    class={`block px-4 py-2 text-sm transition-colors ${
+                      isProjectActive
+                        ? 'text-accent bg-slate-800'
+                        : 'text-slate-300 hover:text-slate-50 hover:bg-slate-800'
+                    }`}
+                    {...(isExternalUrl ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  >
+                    <div class="font-medium">{project.name}</div>
+                    {project.subtitle && (
+                      <div class="text-xs text-slate-400 mt-0.5">{project.subtitle}</div>
+                    )}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        
+        {navItems.map((item) => {
+          const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          return (
+            <a
+              href={item.href}
+              class={`px-4 py-2 text-sm font-medium uppercase transition-colors relative ${
+                isActive
+                  ? 'text-accent'
+                  : 'text-slate-300 hover:text-slate-50'
+              }`}
+            >
+              {item.label}
+              {isActive && (
+                <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"></span>
+              )}
+            </a>
+          );
+        })}
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <button class="hidden md:block text-slate-300 hover:text-slate-50 transition-colors" id="search-button">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+        <button class="md:hidden text-slate-300 hover:text-slate-50" id="mobile-menu-button">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="md:hidden hidden bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 relative" id="mobile-menu">
+    <div class="px-4 py-2 space-y-1">
+      <!-- Mobile Projekty Dropdown -->
+      <button
+        class={`w-full flex items-center justify-between px-4 py-2 text-sm font-medium rounded ${
+          currentPath.startsWith('/projekty') || currentPath.startsWith('/ve-jmenu-lilie')
+            ? 'text-accent bg-slate-800'
+            : 'text-slate-300 hover:text-slate-50 hover:bg-slate-800'
+        }`}
+        id="mobile-projects-button"
+      >
+        <span>Projekty</span>
+        <svg class="w-4 h-4 transition-transform" id="mobile-projects-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div class="hidden pl-4 space-y-1" id="mobile-projects-menu">
+        <a
+          href="/projekty"
+          class={`block px-4 py-2 text-sm rounded ${
+            currentPath === '/projekty'
+              ? 'text-accent bg-slate-800'
+              : 'text-slate-300 hover:text-slate-50 hover:bg-slate-800'
+          }`}
+        >
+          Všechny projekty
+        </a>
+        {projects.map((project) => {
+          const projectUrl = project.externalUrl || `/projekty/${project.slug}`;
+          const isProjectActive = currentPath === projectUrl || currentPath.startsWith(`/projekty/${project.slug}`) || currentPath === project.externalUrl;
+          const isExternalUrl = project.externalUrl && (project.externalUrl.startsWith('http://') || project.externalUrl.startsWith('https://'));
+          return (
+            <a
+              href={projectUrl}
+              class={`block px-4 py-2 text-sm rounded ${
+                isProjectActive
+                  ? 'text-accent bg-slate-800'
+                  : 'text-slate-300 hover:text-slate-50 hover:bg-slate-800'
+              }`}
+              {...(isExternalUrl ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <div class="font-medium">{project.name}</div>
+              {project.subtitle && (
+                <div class="text-xs text-slate-400 mt-0.5">{project.subtitle}</div>
+              )}
+            </a>
+          );
+        })}
+      </div>
+      
+      {navItems.map((item) => {
+        const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={`block px-4 py-2 text-sm font-medium rounded ${
+              isActive
+                ? 'text-accent bg-slate-800'
+                : 'text-slate-300 hover:text-slate-50 hover:bg-slate-800'
+            }`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</nav>
+
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileProjectsButton = document.getElementById('mobile-projects-button');
+  const mobileProjectsMenu = document.getElementById('mobile-projects-menu');
+  const mobileProjectsChevron = document.getElementById('mobile-projects-chevron');
+  
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+  
+  if (mobileProjectsButton && mobileProjectsMenu && mobileProjectsChevron) {
+    mobileProjectsButton.addEventListener('click', () => {
+      mobileProjectsMenu.classList.toggle('hidden');
+      mobileProjectsChevron.classList.toggle('rotate-180');
+    });
+  }
+</script>

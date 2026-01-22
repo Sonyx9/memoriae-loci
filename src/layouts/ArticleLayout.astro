@@ -1,0 +1,80 @@
+---
+interface Props {
+  title: string;
+  excerpt?: string;
+  coverImage?: string;
+  cover?: { src: string; alt: string };
+  heroCaption?: string;
+  gallery?: Array<{ src: string; alt: string }>;
+  publishedAt: string;
+  project?: string;
+  tags?: string[];
+  readingTime?: number;
+  children?: any;
+}
+
+const { 
+  title, 
+  excerpt, 
+  coverImage, 
+  cover,
+  heroCaption,
+  gallery,
+  publishedAt,
+  project,
+  tags = [],
+  readingTime,
+  children 
+} = Astro.props;
+
+const coverSrc = cover?.src || coverImage;
+const coverAlt = cover?.alt || title;
+---
+
+<div class="min-h-screen bg-slate-950 pt-16">
+  <!-- Desktop Split Layout -->
+  <div class="hidden lg:flex lg:min-h-screen">
+    <!-- Left: Hero Media (Sticky) -->
+    <div class="lg:w-[65%] lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)] lg:overflow-hidden">
+      <div class="relative w-full h-full">
+        <slot name="hero" />
+        {heroCaption && (
+          <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent">
+            <p class="text-slate-300 text-sm font-light">{heroCaption}</p>
+          </div>
+        )}
+      </div>
+    </div>
+    
+    <!-- Right: Article Panel (Scrollable) -->
+    <div class="lg:w-[35%] lg:h-[calc(100vh-4rem)] lg:overflow-y-auto bg-slate-950/95 border-l border-white/10">
+      <slot name="panel" />
+    </div>
+  </div>
+  
+  <!-- Mobile/Tablet Stack Layout -->
+  <div class="lg:hidden">
+    <!-- Hero Image -->
+    <div class="relative" style="aspect-ratio: 16/10;">
+      <slot name="hero" />
+      {heroCaption && (
+        <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent">
+          <p class="text-slate-300 text-sm font-light">{heroCaption}</p>
+        </div>
+      )}
+    </div>
+    
+    <!-- Article Panel -->
+    <div class="bg-slate-950/95">
+      <slot name="panel" />
+    </div>
+  </div>
+  
+  <!-- Article Content (below hero and panel on desktop, below panel on mobile) -->
+  <div class="bg-slate-950">
+    <slot name="content" />
+  </div>
+  
+  <!-- Additional Content (Related Articles, etc.) -->
+  <slot />
+</div>

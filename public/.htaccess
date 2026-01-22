@@ -1,0 +1,5 @@
+# Astro will handle routing, but this can be useful for PHP admin
+RewriteEngine On
+
+# Redirect to index.html for clean URLs (handled by Astro)
+# PHP admin routes should work directly

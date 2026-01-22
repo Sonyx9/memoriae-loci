@@ -1,0 +1,46 @@
+---
+import type { Article } from '../../lib/types';
+
+interface Props {
+  articles: Article[];
+}
+
+const { articles } = Astro.props;
+---
+
+{articles.length > 0 && (
+  <section class="bg-slate-900 py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-serif text-slate-100 mb-12">Související články</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {articles.map((article) => (
+          <a 
+            href={`/magazin/${article.slug}`}
+            class="group block"
+          >
+            <div class="aspect-video overflow-hidden mb-4 rounded">
+              <img 
+                src={(() => {
+                  const img = article.coverImage && article.coverImage.trim();
+                  if (!img || img === '/images/placeholder.svg' || img === '/images/liberec.png' || img === '/images/articles/example.jpg') {
+                    return '/images/liberec-hero.webp';
+                  }
+                  return img;
+                })()} 
+                alt={article.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <h3 class="text-xl font-serif text-slate-100 mb-2 group-hover:text-accent transition-colors">
+              {article.title}
+            </h3>
+            {article.excerpt && (
+              <p class="text-slate-400 text-sm line-clamp-2">{article.excerpt}</p>
+            )}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

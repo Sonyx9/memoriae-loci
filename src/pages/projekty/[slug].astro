@@ -1,0 +1,405 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import { getArticlesByProject } from '../../lib/articles';
+import { getProjectBySlug, projects } from '../../lib/projects';
+import { formatDate } from '../../lib/utils';
+
+// Generate static paths for all projects
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const projectArticles = await getArticlesByProject(project.slug);
+---
+
+<BaseLayout 
+  title={`${project.name} - Memoriae Loci`}
+  description={project.description}
+>
+  <Navigation />
+  
+  {project.slug === 'zapomenuta-mista-liberec' ? (
+    <>
+      <!-- Hero Section -->
+      <section class="relative min-h-screen flex flex-col overflow-hidden -mt-16">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0 w-full h-full">
+          <img 
+            src={project.heroImage} 
+            alt={project.heroImageAlt || project.name}
+            title={project.heroImageTitle}
+            {...(project.heroImageDescription ? { 'data-description': project.heroImageDescription } : {})}
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950/70"></div>
+        </div>
+        
+        <!-- White line separator under menu -->
+        <div class="relative z-10 border-b border-slate-50/20 mt-16"></div>
+        
+        <!-- Main Content -->
+        <div class="relative z-10 flex-1 flex items-center">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <!-- Left side - Title -->
+              <div class="lg:col-span-2" style="margin-top: 80px;">
+                <h1 class="text-6xl md:text-8xl font-bold text-slate-50 leading-tight">
+                  <span class="block">ZAPOMENUTÁ</span>
+                  <span class="block" style="margin-top: 10px;">MÍSTA</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-200 mt-6 max-w-2xl">
+                  {project.description}
+                </p>
+              </div>
+              
+              <!-- Right side - Empty for now -->
+              <div class="hidden lg:flex flex-col items-end space-y-4" style="margin-top: 20px;">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Bottom CTA Sections -->
+        <div class="relative z-10 border-t border-slate-50/20" style="margin-bottom: 20px;">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <!-- O projektu -->
+              <div class="flex flex-col space-y-4">
+                <p class="text-slate-200 text-sm leading-relaxed flex-grow">
+                  Projekt zaměřený na dokumentaci míst, která mají historický význam, ale postupně se vytrácejí z kolektivní paměti.
+                </p>
+                <a 
+                  href="#o-projektu" 
+                  class="inline-flex items-center text-slate-50 font-semibold text-sm hover:text-accent transition-colors group mt-auto"
+                >
+                  <span class="border-b border-accent pb-1">O PROJEKTU</span>
+                  <span class="ml-2">—</span>
+                </a>
+              </div>
+              
+              <!-- Zapojte se -->
+              <div class="flex flex-col space-y-4">
+                <p class="text-slate-200 text-sm leading-relaxed flex-grow">
+                  Máte zájem se zapojit do dokumentace zapomenutých míst? Rádi vás uvítáme v našem týmu.
+                </p>
+                <a 
+                  href="/kontakt" 
+                  class="inline-flex items-center text-slate-50 font-semibold text-sm hover:text-accent transition-colors group mt-auto"
+                >
+                  <span class="border-b border-slate-50 group-hover:border-accent pb-1">ZAPOJTE SE</span>
+                  <span class="ml-2">—</span>
+                </a>
+              </div>
+              
+              <!-- Podpora -->
+              <div class="flex flex-col space-y-4">
+                <p class="text-slate-200 text-sm leading-relaxed flex-grow">
+                  Podpořte náš projekt a pomozte nám zachovat kulturní dědictví pro budoucí generace.
+                </p>
+                <a 
+                  href="#podpora" 
+                  class="inline-flex items-center text-slate-50 font-semibold text-sm hover:text-accent transition-colors group mt-auto"
+                >
+                  <span class="border-b border-slate-50 group-hover:border-accent pb-1">PODPORA</span>
+                  <span class="ml-2">—</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Připravujeme Section -->
+      <section class="bg-slate-950 py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-50 mb-6">Připravujeme</h2>
+            <p class="text-xl text-slate-300 mb-8 leading-relaxed">
+              Projekt "Zapomenutá místa" je v přípravě. Pokud máte zájem se zapojit do dokumentace zapomenutých míst, rádi vás uvítáme v našem týmu.
+            </p>
+            <a 
+              href="/kontakt" 
+              class="inline-block px-8 py-4 bg-accent text-slate-950 font-semibold rounded-lg hover:bg-accent-light transition-colors"
+            >
+              Kontaktovat nás
+            </a>
+          </div>
+        </div>
+      </section>
+      
+      <!-- O projektu Section -->
+      <section id="o-projektu" class="relative bg-slate-900 py-16 border-t border-slate-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-50 mb-8 uppercase text-left">O projektu</h2>
+          <div class="prose prose-invert prose-lg max-w-none text-left">
+            <p class="text-slate-200 text-lg leading-relaxed mb-6">
+              {project.longDescription}
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
+  ) : (
+    <main class="pt-16 min-h-screen">
+      <!-- Hero Section -->
+      <section class="relative h-[70vh] overflow-hidden">
+        <img 
+          src={project.heroImage} 
+          alt={project.heroImageAlt || project.name}
+          title={project.heroImageTitle}
+          {...(project.heroImageDescription ? { 'data-description': project.heroImageDescription } : {})}
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-slate-950/50"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40"></div>
+        <div class="absolute inset-0 flex items-end">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+            <h1 class="text-5xl md:text-6xl font-bold text-slate-50 mb-4">{project.name}</h1>
+            <p class="text-xl text-slate-200 max-w-2xl">{project.description}</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Project Articles -->
+      {projectArticles.length > 0 && (
+        <section class="bg-slate-900 py-12">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-slate-50 mb-8">Články v projektu</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projectArticles.map((article) => (
+                <a 
+                  href={`/magazin/${article.slug}`}
+                  class="group bg-slate-800 rounded-lg overflow-hidden hover:bg-slate-700 transition-all duration-300"
+                >
+                  <div class="aspect-video overflow-hidden">
+                    <img 
+                      src={(() => {
+                        const img = article.coverImage && article.coverImage.trim();
+                        if (!img || img === '/images/placeholder.svg' || img === '/images/liberec.png' || img === '/images/articles/example.jpg') {
+                          return '/images/liberec-hero.webp';
+                        }
+                        return img;
+                      })()} 
+                      alt={article.title}
+                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                  <div class="p-6">
+                    <div class="text-sm text-slate-400 mb-2">
+                      {formatDate(article.publishedAt)}
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-50 mb-2 group-hover:text-accent transition-colors">
+                      {article.title}
+                    </h3>
+                    <p class="text-slate-300 text-sm line-clamp-2">{article.excerpt}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+      
+      <!-- O projektu Section -->
+      {project.longDescription && (
+        <section id="o-projektu" class="relative bg-slate-900 py-16 border-t border-slate-800">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-50 mb-8 uppercase text-left">O projektu</h2>
+            <div class="prose prose-invert prose-lg max-w-none text-left">
+              <p class="text-slate-200 text-lg leading-relaxed mb-6">
+                {project.longDescription}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+    </main>
+  )}
+  
+  <!-- Support Section -->
+  <section id="podpora" class="bg-slate-950 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-accent/50 transition-all group">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+            <div class="aspect-video md:aspect-auto bg-slate-700 relative overflow-hidden">
+              <img 
+                src="/images/podporte-nas.webp" 
+                alt="Historický soudní proces s obviněným stojícím před soudem, kolem něj soudci a diváci"
+                title="Historický soudní proces v soudní síni"
+                data-description="Černobílý snímek z historického soudního procesu. Obviněný stojí před soudem, zatímco soudci a diváci sledují. Na stěně je obraz významné historické osobnosti."
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-slate-950/50"></div>
+            </div>
+            <div class="p-8 flex flex-col justify-center">
+              <h3 class="text-2xl md:text-3xl font-bold text-slate-50 mb-4 group-hover:text-accent transition-colors">
+                Podpořte nás
+              </h3>
+              <p class="text-slate-300 text-base mb-6 leading-relaxed">
+                Dary od fyzických a právnických osob
+              </p>
+              
+              <!-- Bank Account Info -->
+              <div class="space-y-4 mb-6">
+                <div>
+                  <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">Č. účtu</div>
+                  <div class="flex items-center gap-3">
+                    <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">384868895/0600</code>
+                    <button 
+                      id="copy-account-btn"
+                      class="text-slate-400 hover:text-accent transition-colors p-1.5"
+                      aria-label="Kopírovat číslo účtu"
+                    >
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                
+                <div>
+                  <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">IBAN</div>
+                  <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">CZ84 0600 0000 0003 8486 8895</code>
+                </div>
+                
+                <div>
+                  <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">BIC</div>
+                  <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">AGBACZPP</code>
+                </div>
+              </div>
+              
+              <a 
+                href="/podporte-nas" 
+                class="inline-flex items-center text-accent text-sm font-semibold hover:underline w-fit"
+              >
+                Více informací o podpoře →
+              </a>
+            </div>
+            <div class="p-8 flex flex-col justify-center items-center border-t md:border-t-0 md:border-l border-slate-700">
+              <div class="text-xs uppercase tracking-wide text-slate-400 mb-3 text-center">QR platba</div>
+              <img 
+                src="/images/qr-platba.jpg" 
+                alt="QR platba"
+                class="w-48 h-48 bg-white p-2 rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  <!-- Partneři vybraných akcí Section -->
+  <section class="relative py-16 bg-slate-950">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-50 mb-8 uppercase tracking-wide">
+          Partneři vybraných akcí
+        </h2>
+        <div class="flex flex-wrap items-center gap-8 md:gap-12">
+          <!-- Liberecký kraj logo -->
+          <a 
+            href="https://www.kraj-lbc.cz" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:opacity-80 transition-opacity"
+          >
+            <img 
+              src="/images/logo-liberecky-kraj.png" 
+              alt="Liberecký kraj"
+              class="h-12 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </a>
+          <!-- Krajská vědecká knihovna v Liberci logo -->
+          <a 
+            href="https://www.kvkli.cz" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:opacity-80 transition-opacity"
+          >
+            <img 
+              src="/images/logo-kvkli.svg" 
+              alt="Krajská vědecká knihovna v Liberci"
+              class="h-12 opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </a>
+          <!-- FP TUL logo -->
+          <a 
+            href="https://www.fp.tul.cz" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:opacity-80 transition-opacity"
+          >
+            <img 
+              src="https://www.fp.tul.cz/templates/yootheme/cache/d8/FP-znacka-d8bb453b.png" 
+              alt="Fakulta přírodovědně-humanitní a pedagogická TUL"
+              class="h-12 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </a>
+          <!-- Academia logo -->
+          <a 
+            href="https://www.academiaknihy.cz" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:opacity-80 transition-opacity"
+          >
+            <img 
+              src="https://www.academiaknihy.cz/public/dist/images/header-logo-cz--inverse.svg" 
+              alt="Nakladatelství Academia"
+              class="h-12 opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </a>
+          <!-- Liberecký kraj logo (bílé) -->
+          <a 
+            href="https://www.kraj-lbc.cz" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:opacity-80 transition-opacity"
+          >
+            <img 
+              src="/images/logo-liberecky-kraj-6-bile.png" 
+              alt="Liberecký kraj"
+              class="h-20 opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+  
+  <script>
+    // Copy account number functionality
+    if (typeof window !== 'undefined') {
+      document.addEventListener('DOMContentLoaded', () => {
+        const copyBtn = document.getElementById('copy-account-btn');
+        if (copyBtn) {
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText('384868895/0600').then(() => {
+              const originalHTML = copyBtn.innerHTML;
+              copyBtn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
+              copyBtn.classList.add('text-accent');
+              setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.classList.remove('text-accent');
+              }, 2000);
+            });
+          });
+        }
+      });
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

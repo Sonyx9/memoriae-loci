@@ -1,0 +1,119 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description = "Memoriae Loci - Paměť míst. Dokumentujeme příběhy a historii míst, která mají význam.", image } = Astro.props;
+const siteURL = Astro.site || 'https://memoriaeloci.cz';
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+---
+
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    {image && <meta property="og:image" content={new URL(image, siteURL).href} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+  </head>
+  <body class="bg-slate-950 text-slate-50 antialiased">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* Serif font family with better fallbacks */
+  .font-serif,
+  h1.font-serif,
+  h2.font-serif,
+  h3.font-serif,
+  .prose-headings {
+    font-family: 'Georgia', 'Times New Roman', 'Times', serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Better text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+  }
+  
+  /* Smooth transitions */
+  a, button {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  /* Image optimization */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  /* Custom scrollbar for article panel (desktop) */
+  @media (min-width: 1024px) {
+    .article-panel::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .article-panel::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.5);
+    }
+    
+    .article-panel::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.3);
+      border-radius: 4px;
+    }
+    
+    .article-panel::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.5);
+    }
+  }
+  
+  /* Fade-in animation for page load */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  body {
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  /* Subtle hover effects */
+  @media (hover: hover) {
+    a:hover,
+    button:hover {
+      transition-duration: 0.15s;
+    }
+  }
+</style>

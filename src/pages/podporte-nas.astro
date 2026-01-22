@@ -1,0 +1,294 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout 
+  title="Podpořte nás - Memoriae Loci" 
+  description="Podpořte naši práci na dokumentaci příběhů míst"
+>
+  <Navigation />
+  
+  <main class="pt-16 min-h-screen">
+    <!-- Hero -->
+    <section class="bg-slate-900 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-5xl md:text-6xl font-bold text-slate-50 mb-6">Podpořte nás</h1>
+        <p class="text-xl text-slate-300 max-w-3xl">
+          Vaše podpora nám pomáhá dokumentovat a zachovávat příběhy míst, která mají význam pro naši kulturu a společnost.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Support Box with Bank Account Info -->
+    <section class="bg-slate-950 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-accent/50 transition-all group">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+            <div class="aspect-video md:aspect-auto bg-slate-700 relative overflow-hidden">
+              <img 
+                src="/images/podporte-nas.webp" 
+                alt="Historický soudní proces s obviněným stojícím před soudem, kolem něj soudci a diváci"
+                title="Historický soudní proces v soudní síni"
+                data-description="Černobílý snímek z historického soudního procesu. Obviněný stojí před soudem, zatímco soudci a diváci sledují. Na stěně je obraz významné historické osobnosti."
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-slate-950/50"></div>
+            </div>
+            <div class="p-8 flex flex-col justify-center">
+              <h3 class="text-2xl md:text-3xl font-bold text-slate-50 mb-4 group-hover:text-accent transition-colors">
+                Podpořte nás
+              </h3>
+              <p class="text-slate-300 text-base mb-6 leading-relaxed">
+                Dary od fyzických a právnických osob
+              </p>
+              
+              <!-- Bank Account Info -->
+              <div class="space-y-4 mb-6">
+                <div>
+                  <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">Č. účtu</div>
+                  <div class="flex items-center gap-3">
+                    <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">384868895/0600</code>
+                    <button 
+                      id="copy-account-btn"
+                      class="text-slate-400 hover:text-accent transition-colors p-1.5"
+                      aria-label="Kopírovat číslo účtu"
+                    >
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                
+                <div>
+                  <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">IBAN</div>
+                  <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">CZ84 0600 0000 0003 8486 8895</code>
+                </div>
+                
+                <div>
+                  <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">BIC</div>
+                  <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">AGBACZPP</code>
+                </div>
+              </div>
+            </div>
+            <div class="p-8 flex flex-col justify-center items-center border-t md:border-t-0 md:border-l border-slate-700">
+              <div class="text-xs uppercase tracking-wide text-slate-400 mb-3 text-center">QR platba</div>
+              <img 
+                src="/images/qr-platba.jpg" 
+                alt="QR platba"
+                class="w-48 h-48 bg-white p-2 rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Why Support -->
+    <section class="bg-slate-900 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-slate-50 mb-8">Proč podpořit Memoriae Loci?</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-slate-900 p-6 rounded-lg flex gap-4">
+              <div class="flex-shrink-0">
+                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-slate-50 mb-3">Zachování historie</h3>
+                <p class="text-slate-300">
+                  Pomáháte nám zachovat příběhy míst, která by jinak mohla zmizet z kolektivní paměti.
+                </p>
+              </div>
+            </div>
+            <div class="bg-slate-900 p-6 rounded-lg flex gap-4">
+              <div class="flex-shrink-0">
+                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-slate-50 mb-3">Vzdělávání</h3>
+                <p class="text-slate-300">
+                  Naše práce přispívá k lepšímu pochopení historie a kultury naší země.
+                </p>
+              </div>
+            </div>
+            <div class="bg-slate-900 p-6 rounded-lg flex gap-4">
+              <div class="flex-shrink-0">
+                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-slate-50 mb-3">Veřejný přístup</h3>
+                <p class="text-slate-300">
+                  Všechny naše materiály jsou volně přístupné a slouží vzdělávacím účelům.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- How to Support -->
+    <section class="bg-slate-950 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-3xl font-bold text-slate-50 mb-8">Jak nás můžete podpořit?</h2>
+          <div class="space-y-6">
+            <div class="bg-slate-800 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-accent mb-3">Finanční dar</h3>
+              <p class="text-slate-300 mb-4">
+                Finanční podpora nám umožňuje pokračovat v dokumentaci a rozvíjet naše projekty.
+              </p>
+              <p class="text-slate-400 text-sm">
+                Pro více informací nás kontaktujte na <a href="/kontakt" class="text-accent hover:text-accent-light">kontaktní stránce</a>.
+              </p>
+            </div>
+            <div class="bg-slate-800 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-accent mb-3">Partnerství</h3>
+              <p class="text-slate-300 mb-4">
+                Hledáme partnery, kteří by chtěli podpořit naše projekty nebo se na nich podílet.
+              </p>
+              <p class="text-slate-400 text-sm">
+                Pro více informací nás kontaktujte na <a href="/kontakt" class="text-accent hover:text-accent-light">kontaktní stránce</a>.
+              </p>
+            </div>
+            <div class="bg-slate-800 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-accent mb-3">Dobrovolnictví</h3>
+              <p class="text-slate-300">
+                Pokud máte zájem zapojit se do naší práce, rádi vás uvítáme v našem týmu.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="bg-slate-900 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center bg-slate-900 p-12 rounded-lg">
+          <h2 class="text-3xl font-bold text-slate-50 mb-4">Děkujeme za vaši podporu</h2>
+          <p class="text-slate-300 mb-8">
+            Každá podpora, ať už finanční nebo jiná, nám pomáhá pokračovat v naší práci.
+          </p>
+          <a 
+            href="/kontakt" 
+            class="inline-block px-8 py-4 bg-accent text-slate-950 font-semibold rounded-lg hover:bg-accent-light transition-colors"
+          >
+            Kontaktovat nás
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Partneři vybraných akcí Section -->
+    <section class="relative py-16 bg-slate-950">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl">
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-50 mb-8 uppercase tracking-wide">
+            Partneři vybraných akcí
+          </h2>
+          <div class="flex flex-wrap items-center gap-8 md:gap-12">
+            <!-- Liberecký kraj logo -->
+            <a 
+              href="https://www.kraj-lbc.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="/images/logo-liberecky-kraj.png" 
+                alt="Liberecký kraj"
+                class="h-12 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <!-- Krajská vědecká knihovna v Liberci logo -->
+            <a 
+              href="https://www.kvkli.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="/images/logo-kvkli.svg" 
+                alt="Krajská vědecká knihovna v Liberci"
+                class="h-12 opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <!-- FP TUL logo -->
+            <a 
+              href="https://www.fp.tul.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="https://www.fp.tul.cz/templates/yootheme/cache/d8/FP-znacka-d8bb453b.png" 
+                alt="Fakulta přírodovědně-humanitní a pedagogická TUL"
+                class="h-12 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <!-- Academia logo -->
+            <a 
+              href="https://www.academiaknihy.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="https://www.academiaknihy.cz/public/dist/images/header-logo-cz--inverse.svg" 
+                alt="Nakladatelství Academia"
+                class="h-12 opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <!-- Liberecký kraj logo (bílé) -->
+            <a 
+              href="https://www.kraj-lbc.cz" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src="/images/logo-liberecky-kraj-6-bile.png" 
+                alt="Liberecký kraj"
+                class="h-20 opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+  
+  <script>
+    // Copy account number functionality
+    if (typeof window !== 'undefined') {
+      document.addEventListener('DOMContentLoaded', () => {
+        const copyBtn = document.getElementById('copy-account-btn');
+        if (copyBtn) {
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText('384868895/0600').then(() => {
+              const originalHTML = copyBtn.innerHTML;
+              copyBtn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
+              copyBtn.classList.add('text-accent');
+              setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.classList.remove('text-accent');
+              }, 2000);
+            });
+          });
+        }
+      });
+    }
+  </script>
+</BaseLayout>
