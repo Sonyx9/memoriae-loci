@@ -42,6 +42,7 @@ import { projects } from '../../lib/projects';
                   title={project.heroImageTitle}
                   {...(project.heroImageDescription ? { 'data-description': project.heroImageDescription } : {})}
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  {...(project.heroImagePosition ? { style: `object-position: ${project.heroImagePosition}` } : {})}
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent"></div>
               </div>

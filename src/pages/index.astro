@@ -211,6 +211,7 @@ for (let i = -2; i <= 2; i++) {
                 title={project.heroImageTitle}
                 {...(project.heroImageDescription ? { 'data-description': project.heroImageDescription } : {})}
                 class="block w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                {...(project.heroImagePosition ? { style: `object-position: ${project.heroImagePosition}` } : {})}
               />
               <div class="absolute inset-0 bg-slate-950/50"></div>
             </div>
