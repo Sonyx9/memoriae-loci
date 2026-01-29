@@ -48,7 +48,9 @@ const { class: className = '' } = Astro.props;
         </div>
         <div>
           <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">IBAN</div>
-          <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">CZ84 0600 0000 0003 8486 8895</code>
+          <div class="overflow-x-auto -mx-1 px-1" aria-label="IBAN v jednom řádku">
+            <code class="inline-block text-sm sm:text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700 whitespace-nowrap min-w-0">CZ84 0600 0000 0003 8486 8895</code>
+          </div>
         </div>
         <div>
           <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">BIC</div>
