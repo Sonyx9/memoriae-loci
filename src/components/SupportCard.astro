@@ -1,0 +1,97 @@
+---
+interface Props {
+  /** Volitelná třída pro obal */
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-accent/50 transition-all group ${className}`}>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+    <div class="aspect-video md:aspect-auto bg-slate-700 relative overflow-hidden">
+      <img 
+        src="/images/podporte-nas.webp" 
+        alt="Historický soudní proces s obviněným stojícím před soudem, kolem něj soudci a diváci"
+        title="Historický soudní proces v soudní síni"
+        data-description="Černobílý snímek z historického soudního procesu. Obviněný stojí před soudem, zatímco soudci a diváci sledují. Na stěně je obraz významné historické osobnosti."
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-slate-950/50"></div>
+    </div>
+    <div class="p-8 flex flex-col justify-center">
+      <h3 class="text-2xl md:text-3xl font-bold text-slate-50 mb-4 group-hover:text-accent transition-colors">
+        Podpořte nás
+      </h3>
+      <p class="text-slate-300 text-base mb-6 leading-relaxed">
+        Dary od fyzických a právnických osob
+      </p>
+      
+      <div class="space-y-4 mb-6">
+        <div>
+          <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">Č. účtu</div>
+          <div class="flex items-center gap-3">
+            <code class="support-card-account text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">384868895/0600</code>
+            <button 
+              type="button"
+              class="support-copy-btn text-slate-400 hover:text-accent transition-colors p-1.5"
+              aria-label="Kopírovat číslo účtu"
+              data-account="384868895/0600"
+            >
+              <svg class="w-5 h-5 copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <svg class="w-5 h-5 check-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">IBAN</div>
+          <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">CZ84 0600 0000 0003 8486 8895</code>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">BIC</div>
+          <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">AGBACZPP</code>
+        </div>
+      </div>
+      
+      <a 
+        href="/podporte-nas" 
+        class="inline-flex items-center text-accent text-sm font-semibold hover:underline w-fit"
+      >
+        Více informací o podpoře →
+      </a>
+    </div>
+    <div class="p-8 flex flex-col justify-center items-center border-t md:border-t-0 md:border-l border-slate-700">
+      <div class="text-xs uppercase tracking-wide text-slate-400 mb-3 text-center">QR platba</div>
+      <img 
+        src="/images/qr-platba.jpg" 
+        alt="QR platba"
+        class="w-48 h-48 bg-white p-2 rounded-lg"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.support-copy-btn').forEach((btn) => {
+      const account = (btn as HTMLButtonElement).dataset.account || '384868895/0600';
+      const copyIcon = btn.querySelector('.copy-icon');
+      const checkIcon = btn.querySelector('.check-icon');
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(account).then(() => {
+          copyIcon?.classList.add('hidden');
+          checkIcon?.classList.remove('hidden');
+          btn.classList.add('text-accent');
+          setTimeout(() => {
+            copyIcon?.classList.remove('hidden');
+            checkIcon?.classList.add('hidden');
+            btn.classList.remove('text-accent');
+          }, 2000);
+        });
+      });
+    });
+  });
+</script>

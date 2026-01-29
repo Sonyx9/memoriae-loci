@@ -6,7 +6,7 @@ Moderní, vizuálně silný web pro neziskovou organizaci Memoriae Loci, zaměř
 
 - **Astro** - statický generátor webu
 - **Tailwind CSS** - styling
-- **PHP** - jednoduchá administrace článků
+- **Decap CMS** - Git-based administrace článků
 - **Markdown** - obsah článků
 
 ## Struktura projektu
@@ -20,9 +20,10 @@ MemoriaeLoci/
 │   ├── layouts/         # Layout komponenty
 │   ├── lib/             # Utility funkce
 │   └── pages/           # Stránky webu
-├── admin/               # PHP administrace
-│   ├── index.php        # Login
-│   └── articles.php     # Správa článků
+├── public/
+│   └── admin/           # Decap CMS administrace
+│       ├── index.html   # Admin rozhraní
+│       └── config.yml   # CMS konfigurace
 └── dist/                # Build výstup (generováno)
 ```
 
@@ -46,29 +47,46 @@ npm run dev
 npm run build
 ```
 
-Výstup bude v adresáři `dist/`, který obsahuje čisté HTML, CSS a JS soubory připravené k nahrání na FTP hosting.
+Výstup bude v adresáři `dist/`, který obsahuje čisté HTML, CSS a JS soubory připravené k nasazení na GitHub Pages nebo FTP hosting.
 
-## Nasazení na Forpsi
+## Nasazení
+
+### Hybridní řešení (doporučeno) ⭐
+
+**GitHub Pages (hlavní web) + Railway (administrace)**
+
+1. **GitHub Pages:**
+   - Push do GitHub repozitáře
+   - Settings → Pages → Source: GitHub Actions
+   - Hotovo! Web je na GitHub Pages
+
+2. **Railway (admin):**
+   - Přihlaste se na [railway.app](https://railway.app)
+   - New Project → Deploy from GitHub repo
+   - Vyberte repozitář
+   - Hotovo! Admin je na Railway
+
+**Výhody:**
+- ✅ Web zdarma na GitHub Pages
+- ✅ Admin na Railway (možnost vlastní domény)
+- ✅ Oddělené nasazení
+
+Více informací: viz `HYBRID-SETUP.md`
+
+### Klasický hosting (FTP)
 
 1. Spusťte build: `npm run build`
 2. Nahrajte obsah adresáře `dist/` na FTP server
-3. Nahrajte také adresář `admin/` (PHP soubory)
-4. Nastavte správná oprávnění pro adresář `src/content/articles/` (PHP admin potřebuje zápis)
-
-### Důležité poznámky
-
-- PHP admin očekává, že články jsou v `src/content/articles/` (relativně k admin složce)
-- Změňte výchozí heslo v `admin/index.php`
-- Ujistěte se, že PHP má oprávnění k zápisu do adresáře s články
+3. Pro administraci použijte Decap CMS přes GitHub (Git-based workflow)
 
 ## Přidání článku
 
-### Přes PHP admin
+### Přes Decap CMS (doporučeno)
 
-1. Přejděte na `/admin`
-2. Přihlaste se
-3. Klikněte na "Nový článek"
-4. Vyplňte formulář a uložte
+1. Po nasazení otevřete `/admin/`
+2. Přihlaste se přes GitHub
+3. Vytvořte nebo upravte článek
+4. Web se automaticky přebuildí a nasadí
 
 ### Manuálně
 
@@ -102,10 +120,11 @@ Obsah článku v Markdown formátu...
 
 ## Administrace
 
-- `/admin` - Login
-- `/admin/articles` - Seznam článků
-- `/admin/articles/new` - Nový článek
-- `/admin/articles/edit` - Editace článku
+- **Admin URL:** `https://YOUR_PROJECT.railway.app/admin/` (Railway)
+- **Decap CMS** - Git-based administrace
+- Přihlášení přes GitHub
+- Automatický build a nasazení po každé změně
+- Změny se automaticky projeví na hlavním webu (GitHub Pages)
 
 ## Projekty
 
@@ -122,8 +141,8 @@ Web používá tmavý design s oranžovými akcenty:
 
 - ❌ Žádné AI aplikace, chaty, externí API
 - ❌ Žádný komplexní backend
-- ✅ Statický web s jednoduchou PHP administrací
-- ✅ Funguje na klasickém FTP hostingu
+- ✅ Statický web s Git-based administrací (Decap CMS)
+- ✅ Funguje na GitHub Pages nebo klasickém FTP hostingu
 
 ## Podpora
 

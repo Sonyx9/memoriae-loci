@@ -28,8 +28,6 @@ export interface Project {
   heroImageAlt?: string;
   heroImageTitle?: string;
   heroImageDescription?: string;
-  /** CSS object-position (např. "50% 20%" pro posun nahoru, aby byla vidět hlava) */
-  heroImagePosition?: string;
   longDescription?: string;
   externalUrl?: string;
   subtitle?: string;

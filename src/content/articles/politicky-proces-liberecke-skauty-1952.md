@@ -12,6 +12,11 @@ cover:
   src: "/images/liberec.png"
   alt: "Liberec v mlze – paměť města"
 heroCaption: "Liberec, 1952 — paměť místa"
+youtubeId: "xb0x5_Z1asI"
+audioUrl: "/audio/pripad-tomsa-libereckych-skautu.m4a"
+infographic:
+  src: "/images/casova-osa-perzekuce-skautu.webp"
+  alt: "Infografika popisující časovou osu perzekuce libereckých skautů, včetně klíčových událostí a postav od roku 1948 do 1973."
 gallery:
   - src: "/images/placeholder.svg"
     alt: "Zástupný obrázek"
@@ -22,10 +27,6 @@ gallery:
 # Úvod
 
 V roce 1951 v září a v prosinci bylo pozatýkáno celkem 12 převážně pražských skautských činovníků. V čele této skupiny stál Karel Průcha. Následovalo obvinění z pokusu o vytvoření Ilegálního ústředí Junáka, jež se mělo zapojit do příprav protikomunistického převratu se záměrem znovu založit skautské hnutí. Jedním ze zatčených činovníků se stal i liberecký Ivan Mikšovič. Ten byl obviněn z toho, že v letech 1949 až 1951 aktivizoval některé liberecké skauty, z nichž StB vytvořila severočeskou odnož skupiny Průchovy známou též jako skupina profesora Tomsy.
-
----
-
-# Hlavní část
 
 ## Vůdcovské zkoušky v Polesí u Rýnovic
 

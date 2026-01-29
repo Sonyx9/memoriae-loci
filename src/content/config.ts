@@ -23,6 +23,15 @@ const articlesCollection = defineCollection({
     tags: z.array(z.string()).default([]),
     author: z.string().optional(),
     sources: z.array(z.string()).default([]),
+    /** URL nebo relativní cesta zvukové stopy – shrnutí článku (přehrávání na webu). Např. /audio/soubor.m4a nebo https://... */
+    audioUrl: z.string().optional(),
+    /** ID videa z YouTube (např. dQw4w9WgXcQ) – vloží se nad závěr vedle infografiky */
+    youtubeId: z.string().optional(),
+    /** Infografika – obrázek vedle videa (nad závěr) */
+    infographic: z.object({
+      src: z.string(),
+      alt: z.string(),
+    }).optional(),
   }),
 });
 

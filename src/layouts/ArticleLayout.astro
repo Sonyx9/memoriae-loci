@@ -46,8 +46,8 @@ const coverAlt = cover?.alt || title;
       </div>
     </div>
     
-    <!-- Right: Article Panel (Scrollable) -->
-    <div class="lg:w-[35%] lg:h-[calc(100vh-4rem)] lg:overflow-y-auto bg-slate-950/95 border-l border-white/10">
+    <!-- Right: Article Panel (scrolluje společně se stránkou, bez vlastního scrollbaru) -->
+    <div class="lg:w-[35%] lg:sticky lg:top-16 lg:self-start bg-slate-950/95 border-l border-white/10">
       <slot name="panel" />
     </div>
   </div>

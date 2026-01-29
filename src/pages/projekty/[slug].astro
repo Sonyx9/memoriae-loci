@@ -155,7 +155,6 @@ const projectArticles = await getArticlesByProject(project.slug);
           title={project.heroImageTitle}
           {...(project.heroImageDescription ? { 'data-description': project.heroImageDescription } : {})}
           class="w-full h-full object-cover"
-          {...(project.heroImagePosition ? { style: `object-position: ${project.heroImagePosition}` } : {})}
         />
         <div class="absolute inset-0 bg-slate-950/50"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40"></div>

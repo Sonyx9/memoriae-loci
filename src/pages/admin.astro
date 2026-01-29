@@ -1,0 +1,46 @@
+---
+// Astro stránka pro admin - servuje Decap CMS
+---
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager - Memoriae Loci</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Include the script that builds the page and boots Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Decap CMS automaticky hledá config.yml v /admin/config.yml
+    // Soubor je v public/admin/config.yml, takže bude dostupný na /admin/config.yml
+    
+    // Automaticky detekuje lokální vs produkční prostředí
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
+    if (isLocal) {
+      console.log('🔧 Lokální režim - Decap CMS');
+      console.log('📝 Config: /admin/config.yml');
+      console.log('⚠️ Pro lokální vývoj bez přihlášení použijte test-repo backend');
+    }
+    
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

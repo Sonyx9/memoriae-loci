@@ -1,5 +1,13 @@
-# Astro will handle routing, but this can be useful for PHP admin
+# Astro static site + PHP admin
 RewriteEngine On
 
-# Redirect to index.html for clean URLs (handled by Astro)
-# PHP admin routes should work directly
+# PHP admin routes - zpracuj přímo (žádné přesměrování)
+RewriteCond %{REQUEST_URI} ^/admin
+RewriteRule ^admin - [L]
+
+# Pro ostatní routy použij Astro (clean URLs)
+# Pokud soubor nebo adresář neexistuje, přesměruj na index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteRule ^(.*)$ /index.html [L]

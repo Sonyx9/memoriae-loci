@@ -1,0 +1,73 @@
+# Lokální konfigurace pro Decap CMS
+# Použijte tento soubor pro lokální vývoj
+# V produkci se používá config.yml
+
+backend:
+  name: test-repo  # Lokální backend bez autentizace
+  # Nebo použijte "git-gateway" pokud máte nastavený Netlify Git Gateway
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "articles"
+    label: "Články"
+    folder: "src/content/articles"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Název", name: "title", widget: "string", required: true}
+      - {label: "Datum publikace", name: "publishedAt", widget: "date", required: false}
+      - {label: "Datum (alternativa)", name: "date", widget: "date", required: false}
+      - {label: "Status", name: "status", widget: "select", options: ["draft", "published"], default: "draft"}
+      - {label: "Perex", name: "excerpt", widget: "text", required: true}
+      
+      # Cover image - nový formát
+      - label: "Cover obrázek"
+        name: "cover"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "Cesta k obrázku", name: "src", widget: "image", required: true}
+          - {label: "Alt text", name: "alt", widget: "string", required: true}
+      
+      # Cover image - starý formát
+      - {label: "Cover Image (starý formát)", name: "coverImage", widget: "image", required: false}
+      
+      - {label: "Hero popisek", name: "heroCaption", widget: "string", required: false}
+      
+      # Galerie
+      - label: "Galerie"
+        name: "gallery"
+        widget: "list"
+        required: false
+        fields:
+          - {label: "Obrázek", name: "src", widget: "image", required: true}
+          - {label: "Alt text", name: "alt", widget: "string", required: true}
+      
+      - {label: "Projekt", name: "project", widget: "string", required: false}
+      - label: "Tagy"
+        name: "tags"
+        widget: "list"
+        default: []
+        field: {label: "Tag", name: "tag", widget: "string"}
+      - {label: "Autor", name: "author", widget: "string", required: false}
+      - label: "Zdroje"
+        name: "sources"
+        widget: "list"
+        default: []
+        required: false
+        field: {label: "Zdroj", name: "source", widget: "string"}
+      - {label: "Audio URL", name: "audioUrl", widget: "string", required: false, hint: "URL zvukové stopy"}
+      - {label: "YouTube ID", name: "youtubeId", widget: "string", required: false, hint: "ID videa z YouTube (např. dQw4w9WgXcQ)"}
+      
+      # Infografika
+      - label: "Infografika"
+        name: "infographic"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "Cesta k obrázku", name: "src", widget: "image", required: true}
+          - {label: "Alt text", name: "alt", widget: "string", required: true}
+      
+      - {label: "Obsah", name: "body", widget: "markdown", required: true}
