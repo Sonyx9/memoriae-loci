@@ -72,10 +72,10 @@ const projectData = project ? projects.find(p => p.slug === project) : null;
     </div>
   </header>
   
-  <!-- Footer CTA -->
+  <!-- Footer CTA: na mobilu jen Podpořte nás, na desktopu všechna tlačítka -->
   <div class="mt-8 pt-6 border-t border-white/10">
     <div class="flex flex-col gap-2">
-      <div class="flex flex-col sm:flex-row gap-2">
+      <div class="hidden sm:flex flex-col sm:flex-row gap-2">
         <button 
           id="read-article-btn"
           class="flex-1 px-4 py-2.5 text-xs uppercase tracking-wider text-slate-50 bg-accent hover:bg-accent-light transition-all font-semibold rounded-lg"
@@ -92,7 +92,7 @@ const projectData = project ? projects.find(p => p.slug === project) : null;
       <div class="flex flex-col sm:flex-row gap-2">
         <a 
           href="#article-audio-block" 
-          class="flex-1 text-center px-4 py-2.5 text-xs uppercase tracking-wider text-slate-300 border border-slate-700/50 hover:border-accent hover:text-accent transition-all font-light rounded-lg"
+          class="hidden sm:flex flex-1 text-center px-4 py-2.5 text-xs uppercase tracking-wider text-slate-300 border border-slate-700/50 hover:border-accent hover:text-accent transition-all font-light rounded-lg"
         >
           Debata
         </a>

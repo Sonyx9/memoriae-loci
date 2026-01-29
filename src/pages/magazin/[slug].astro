@@ -172,7 +172,7 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site || 'https://memoriaeloc
                 class="w-full h-12" 
                 controls 
                 controlsList="nodownload"
-                preload="metadata"
+                preload="none"
                 style="min-height: 48px;"
               >
                 <source src={article.audioUrl} type="audio/mp4" />

@@ -3,7 +3,7 @@ title: "Politický proces s Libereckými skauty (1952)"
 date: "2024-05-10"
 status: published
 excerpt: "V letech 1951–1952 došlo k zatýkání skautských činovníků v Liberci a okolí. Tento politický proces byl součástí širší kampaně proti skautskému hnutí v Československu."
-project: "Kameny zmizelých"
+project: "pribehy-mest"
 tags: ["Liberec", "Skaut", "50. léta", "Politické procesy"]
 author: "Mgr. Lukáš Koula"
 sources:

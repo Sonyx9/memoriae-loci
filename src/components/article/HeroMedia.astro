@@ -24,8 +24,7 @@ const allImages = coverSrc ? [{ src: coverSrc, alt: coverAlt }, ...(gallery || [
     <img 
       src={coverSrc} 
       alt={coverAlt}
-      class="w-full h-full object-cover hero-image"
-      style="min-height: 100vh;"
+      class="w-full h-full object-cover hero-image min-h-0 lg:min-h-[100vh]"
       loading="eager"
     />
     <!-- Dark gradient overlay for better UI contrast -->
@@ -34,7 +33,7 @@ const allImages = coverSrc ? [{ src: coverSrc, alt: coverAlt }, ...(gallery || [
   </div>
   
   {gallery && gallery.length > 0 && (
-    <div class="absolute bottom-6 left-6 right-6 lg:bottom-8 lg:left-8 lg:right-8">
+    <div class="hidden lg:block absolute bottom-6 left-6 right-6 lg:bottom-8 lg:left-8 lg:right-8">
       <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
         {gallery.map((img, index) => (
           <button 

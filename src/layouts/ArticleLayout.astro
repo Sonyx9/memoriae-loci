@@ -52,21 +52,20 @@ const coverAlt = cover?.alt || title;
     </div>
   </div>
   
-  <!-- Mobile/Tablet Stack Layout -->
-  <div class="lg:hidden">
-    <!-- Hero Image -->
-    <div class="relative" style="aspect-ratio: 16/10;">
+  <!-- Mobile/Tablet Stack Layout: nejdřív panel (nadpis + info), pak jeden obrázek s overlayem -->
+  <div class="lg:hidden relative">
+    <!-- 1. Panel s názvem a informacemi nahoře – pevně nad obrázkem -->
+    <div class="relative z-10 bg-slate-950">
+      <slot name="panel" />
+    </div>
+    <!-- 2. Jen jeden hero obrázek pod panelem (galerie skryta na mobilu v HeroMedia) -->
+    <div class="relative overflow-hidden z-0" style="aspect-ratio: 16/10;">
       <slot name="hero" />
       {heroCaption && (
         <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent">
           <p class="text-slate-300 text-sm font-light">{heroCaption}</p>
         </div>
       )}
-    </div>
-    
-    <!-- Article Panel -->
-    <div class="bg-slate-950/95">
-      <slot name="panel" />
     </div>
   </div>
   
