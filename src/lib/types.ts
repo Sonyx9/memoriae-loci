@@ -28,6 +28,8 @@ export interface Project {
   heroImageAlt?: string;
   heroImageTitle?: string;
   heroImageDescription?: string;
+  /** Pozice ořezu obrázku (např. "50% 0%" = horní část, aby byl vidět obličej) */
+  heroImagePosition?: string;
   longDescription?: string;
   externalUrl?: string;
   subtitle?: string;

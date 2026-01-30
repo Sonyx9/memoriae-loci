@@ -21,8 +21,92 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
     
-    <!-- Support Box with Bank Account Info -->
-    <section class="bg-slate-950 py-20">
+    <!-- How to Support – nad blokem Vaše podpora má smysl (stejná šířka jako Support Box) -->
+    <section class="bg-slate-950 pt-24 pb-8 border-t border-slate-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div>
+          <div class="mb-14">
+            <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-3">Cesty k podpoře</p>
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-50 mb-5 leading-tight">Jak nás můžete podpořit?</h2>
+            <p class="text-lg text-slate-300 max-w-2xl leading-relaxed">
+              Každá forma podpory má pro nás velký význam. Vyberte si, co vám dává smysl.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Řádek 1: tři karty vedle sebe -->
+            <div class="group bg-slate-800/80 p-6 rounded-xl border border-slate-700 hover:border-slate-600 transition-all duration-300 flex flex-col">
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 class="text-base font-bold text-slate-50 mb-1.5">Partnerství</h3>
+              <p class="text-slate-300 text-sm leading-relaxed flex-grow mb-3">
+                Hledáme partnery, kteří by chtěli podpořit naše projekty nebo se na nich podílet.
+              </p>
+              <a href="/kontakt" class="text-accent text-xs font-semibold hover:underline mt-auto inline-flex items-center gap-1">
+                Napsat nám
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+              </a>
+            </div>
+            <div class="group bg-slate-800/80 p-6 rounded-xl border border-slate-700 hover:border-slate-600 transition-all duration-300 flex flex-col">
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <h3 class="text-base font-bold text-slate-50 mb-1.5">Dobrovolnictví</h3>
+              <p class="text-slate-300 text-sm leading-relaxed flex-grow mb-3">
+                Pokud máte zájem zapojit se do naší práce, rádi vás uvítáme v našem týmu.
+              </p>
+              <a href="/kontakt" class="text-accent text-xs font-semibold hover:underline mt-auto inline-flex items-center gap-1">
+                Připojit se
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+              </a>
+            </div>
+            <div class="group bg-slate-800/80 p-6 rounded-xl border border-slate-700 hover:border-slate-600 transition-all duration-300 flex flex-col">
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </div>
+              <h3 class="text-base font-bold text-slate-50 mb-1.5">Redaktor – publikace článků</h3>
+              <p class="text-slate-300 text-sm leading-relaxed flex-grow mb-3">
+                Pomozte nám s přípravou a publikací článků do magazínu.
+              </p>
+              <a href="/kontakt" class="text-accent text-xs font-semibold hover:underline mt-auto inline-flex items-center gap-1">
+                Napsat nám
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+              </a>
+            </div>
+            <!-- Řádek 2: Finanční dar na celou šířku -->
+            <div class="md:col-span-3 group bg-slate-800/80 p-6 md:p-8 rounded-xl border border-slate-700 hover:border-slate-600 transition-all duration-300 flex flex-col md:flex-row md:items-center gap-6">
+              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-colors md:w-14 md:h-14">
+                <svg class="w-6 h-6 text-accent md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <div class="flex-grow min-w-0">
+                <h3 class="text-lg md:text-xl font-bold text-slate-50 mb-2">Finanční dar</h3>
+                <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                  Finanční podpora nám umožňuje pokračovat v dokumentaci a rozvíjet naše projekty. Dar můžete poslat na účet nebo využít QR platbu níže.
+                </p>
+              </div>
+              <a 
+                href="#podpora-ma-smysl" 
+                class="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-slate-900 font-semibold text-sm hover:bg-accent/90 transition-colors md:ml-4"
+              >
+                Podpořit
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Support Box with Bank Account Info (Vaše podpora má smysl) -->
+    <section id="podpora-ma-smysl" class="bg-slate-950 pt-8 pb-20 scroll-mt-24">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-accent/50 transition-all group">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
@@ -38,10 +122,10 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-8 flex flex-col justify-center">
               <h3 class="text-2xl md:text-3xl font-bold text-slate-50 mb-4 group-hover:text-accent transition-colors">
-                Podpořte nás
+                Vaše podpora má smysl
               </h3>
               <p class="text-slate-300 text-base mb-6 leading-relaxed">
-                Dary od fyzických a právnických osob
+                Každý příspěvek pomáhá zachovat příběhy, které by jinak zmizely. Děkujeme, že jste s námi.
               </p>
               
               <!-- Bank Account Info -->
@@ -88,110 +172,76 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
     
-    <!-- Why Support -->
-    <section class="bg-slate-900 py-20">
+    <!-- Podporují nás – blok s podporujícími (jen na stránce Podpořte nás) -->
+    <section class="relative py-20 bg-slate-950 border-t border-slate-800">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto">
-          <h2 class="text-3xl font-bold text-slate-50 mb-8">Proč podpořit Memoriae Loci?</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-slate-900 p-6 rounded-lg flex gap-4">
-              <div class="flex-shrink-0">
-                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div>
+          <div class="mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-50 mb-3">Podporují nás</h2>
+            <p class="text-slate-400 max-w-2xl">
+              Děkujeme všem dárcům a podporovatelům, kteří nám pomáhají naplňovat poslání. Každý příspěvek – finanční i lidský – s námi počítá.
+            </p>
+          </div>
+          <div class="bg-slate-800/60 rounded-2xl border border-slate-700 p-8 md:p-10">
+            <p class="text-slate-400 text-sm md:text-base">
+              Zde v budoucnu mohou být jména nebo loga podporovatelů, kteří s tím souhlasí.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Support – tři stejné karty (stejná šířka jako Vaše podpora má smysl) -->
+    <section class="bg-slate-900 py-24 border-t border-slate-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div>
+          <div class="mb-14">
+            <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-3">Vaše podpora má smysl</p>
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-50 mb-5 leading-tight">Proč podpořit Memoriae Loci?</h2>
+            <p class="text-lg text-slate-300 max-w-2xl leading-relaxed">
+              Každý příspěvek pomáhá zachovat příběhy, které by jinak zmizely. Děkujeme, že jste s námi.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="group bg-slate-800/80 p-8 rounded-2xl border border-slate-700 hover:border-slate-600 transition-all duration-300 flex flex-col">
+              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-5 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <div>
-                <h3 class="text-xl font-semibold text-slate-50 mb-3">Zachování historie</h3>
-                <p class="text-slate-300">
-                  Pomáháte nám zachovat příběhy míst, která by jinak mohla zmizet z kolektivní paměti.
-                </p>
-              </div>
+              <h3 class="text-lg font-bold text-slate-50 mb-2">Zachování historie</h3>
+              <p class="text-slate-300 text-sm leading-relaxed flex-grow">
+                Pomáháte zachovat příběhy míst a lidí, které by jinak zmizely z kolektivní paměti. Každý kámen, každý příběh má hodnotu pro další generace.
+              </p>
             </div>
-            <div class="bg-slate-900 p-6 rounded-lg flex gap-4">
-              <div class="flex-shrink-0">
-                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            <div class="group bg-slate-800/80 p-8 rounded-2xl border border-slate-700 hover:border-slate-600 transition-all duration-300 flex flex-col">
+              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-5 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>
-              <div>
-                <h3 class="text-xl font-semibold text-slate-50 mb-3">Vzdělávání</h3>
-                <p class="text-slate-300">
-                  Naše práce přispívá k lepšímu pochopení historie a kultury naší země.
-                </p>
-              </div>
+              <h3 class="text-lg font-bold text-slate-50 mb-2">Vzdělávání a porozumění</h3>
+              <p class="text-slate-300 text-sm leading-relaxed flex-grow">
+                Naše projekty přispívají k lepšímu pochopení historie regionu. Školy, veřejnost i badatelé využívají naše materiály zdarma.
+              </p>
             </div>
-            <div class="bg-slate-900 p-6 rounded-lg flex gap-4">
-              <div class="flex-shrink-0">
-                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="group bg-slate-800/80 p-8 rounded-2xl border border-slate-700 hover:border-slate-600 transition-all duration-300 flex flex-col">
+              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-5 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div>
-                <h3 class="text-xl font-semibold text-slate-50 mb-3">Veřejný přístup</h3>
-                <p class="text-slate-300">
-                  Všechny naše materiály jsou volně přístupné a slouží vzdělávacím účelům.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- How to Support -->
-    <section class="bg-slate-950 py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto">
-          <h2 class="text-3xl font-bold text-slate-50 mb-8">Jak nás můžete podpořit?</h2>
-          <div class="space-y-6">
-            <div class="bg-slate-800 p-6 rounded-lg">
-              <h3 class="text-xl font-semibold text-accent mb-3">Finanční dar</h3>
-              <p class="text-slate-300 mb-4">
-                Finanční podpora nám umožňuje pokračovat v dokumentaci a rozvíjet naše projekty.
-              </p>
-              <p class="text-slate-400 text-sm">
-                Pro více informací nás kontaktujte na <a href="/kontakt" class="text-accent hover:text-accent-light">kontaktní stránce</a>.
-              </p>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-lg">
-              <h3 class="text-xl font-semibold text-accent mb-3">Partnerství</h3>
-              <p class="text-slate-300 mb-4">
-                Hledáme partnery, kteří by chtěli podpořit naše projekty nebo se na nich podílet.
-              </p>
-              <p class="text-slate-400 text-sm">
-                Pro více informací nás kontaktujte na <a href="/kontakt" class="text-accent hover:text-accent-light">kontaktní stránce</a>.
-              </p>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-lg">
-              <h3 class="text-xl font-semibold text-accent mb-3">Dobrovolnictví</h3>
-              <p class="text-slate-300">
-                Pokud máte zájem zapojit se do naší práce, rádi vás uvítáme v našem týmu.
+              <h3 class="text-lg font-bold text-slate-50 mb-2">Veřejný přístup</h3>
+              <p class="text-slate-300 text-sm leading-relaxed flex-grow">
+                Všechny naše výstupy jsou otevřené a slouží vzdělávacím účelům. Podporou umožňujete, aby zůstaly dostupné všem.
               </p>
             </div>
           </div>
         </div>
       </div>
     </section>
-    
-    <!-- CTA -->
-    <section class="bg-slate-900 py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-2xl mx-auto text-center bg-slate-900 p-12 rounded-lg">
-          <h2 class="text-3xl font-bold text-slate-50 mb-4">Děkujeme za vaši podporu</h2>
-          <p class="text-slate-300 mb-8">
-            Každá podpora, ať už finanční nebo jiná, nám pomáhá pokračovat v naší práci.
-          </p>
-          <a 
-            href="/kontakt" 
-            class="inline-block px-8 py-4 bg-accent text-slate-950 font-semibold rounded-lg hover:bg-accent-light transition-colors"
-          >
-            Kontaktovat nás
-          </a>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Partneři vybraných akcí Section -->
+
+    <!-- Partneři vybraných akcí Section – stejný na všech stránkách -->
     <section class="relative py-16 bg-slate-950">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl">

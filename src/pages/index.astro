@@ -93,7 +93,9 @@ for (let i = -2; i <= 2; i++) {
               Jedním z klíčových center pohraničí bylo město Liberec, které před okupací nacionálně socialistickým Německem patřilo mezi nejvýznamnější centra českých Němců.
             </p>
             <a 
-              href="/magazin/kameny-zmizelych" 
+              href="https://stolpersteine.memoriaeloci.cz/"
+              target="_blank"
+              rel="noopener noreferrer"
               class="inline-flex items-center text-slate-50 font-semibold text-sm hover:text-accent transition-colors group mt-auto"
             >
               <span class="border-b border-accent pb-1">KAMENY ZMIZELÝCH</span>
@@ -151,6 +153,7 @@ for (let i = -2; i <= 2; i++) {
               <div class="absolute inset-0 bg-slate-950/40"></div>
             </div>
             <div class="p-8 flex flex-col justify-center">
+              <p class="text-slate-400 text-sm mb-2">Akce již proběhla. Připravujeme další akce.</p>
               <div class="text-xs text-slate-400 uppercase tracking-wide mb-3">
                 10. PROSINCE 2025, 12:00
               </div>
@@ -212,6 +215,7 @@ for (let i = -2; i <= 2; i++) {
                 title={project.heroImageTitle}
                 {...(project.heroImageDescription ? { 'data-description': project.heroImageDescription } : {})}
                 class="block w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                style={project.heroImagePosition ? { objectPosition: project.heroImagePosition } : undefined}
               />
               <div class="absolute inset-0 bg-slate-950/50"></div>
             </div>
@@ -224,7 +228,7 @@ for (let i = -2; i <= 2; i++) {
                   {project.subtitle}
                 </div>
               )}
-              <p class="text-slate-300 text-lg mb-6 line-clamp-2 flex-grow">{project.description}</p>
+              <p class="text-slate-300 text-base mb-6 line-clamp-3 flex-grow">{project.description}</p>
               <span class="text-accent font-semibold text-lg group-hover:underline mt-auto">
                 {index === 3 ? 'Připravujeme' : 'Zjistit více →'}
               </span>
