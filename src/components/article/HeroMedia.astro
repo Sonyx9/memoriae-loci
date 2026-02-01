@@ -4,9 +4,11 @@ interface Props {
   cover?: { src: string; alt: string };
   gallery?: Array<{ src: string; alt: string }>;
   title: string;
+  /** Zarovnání obrázku (např. 'top' aby byla vidět hlava) – jen u vybraných článků */
+  coverPosition?: 'top' | 'center';
 }
 
-const { coverImage, cover, gallery, title } = Astro.props;
+const { coverImage, cover, gallery, title, coverPosition = 'center' } = Astro.props;
 const coverSrc = (() => {
   const img = cover?.src || (coverImage && coverImage.trim());
   // Ignore non-existent files and placeholder.svg, use hero image as fallback
@@ -24,7 +26,7 @@ const allImages = coverSrc ? [{ src: coverSrc, alt: coverAlt }, ...(gallery || [
     <img 
       src={coverSrc} 
       alt={coverAlt}
-      class="w-full h-full object-cover hero-image min-h-0 lg:min-h-[100vh]"
+      class={`w-full h-full object-cover hero-image min-h-0 lg:min-h-[100vh] ${coverPosition === 'top' ? 'object-top' : 'object-center'}`}
       loading="eager"
     />
     <!-- Dark gradient overlay for better UI contrast -->

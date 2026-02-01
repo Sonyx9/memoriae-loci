@@ -142,49 +142,53 @@ for (let i = -2; i <= 2; i++) {
   <section class="relative bg-slate-900 py-16 border-t border-slate-800">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div>
-        <!-- Single event card - full width -->
-        <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-accent/50 transition-all group">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
-            <div class="aspect-video md:aspect-auto bg-slate-700 relative overflow-hidden">
+        <!-- Doporučená akce – nepořádáme -->
+        <div class="relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-accent/50 transition-all group">
+          <img 
+            src="/images/logo-footer.png" 
+            alt="Memoriae Loci" 
+            class="absolute top-8 right-8 z-10 h-12 w-auto brightness-0 invert opacity-90 group-hover:brightness-100 group-hover:invert-0 transition-[filter,opacity] duration-300"
+          />
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-0">
+            <div class="aspect-video md:aspect-auto md:col-span-2 max-w-sm md:max-w-none mx-auto md:mx-0 bg-slate-700 relative overflow-hidden">
               <img 
-                src="/images/den-lidskych-prav.webp" 
-                alt="Detail rezavého ostnatého drátu v popředí s rozmazaným pozadím, které naznačuje přítomnost osoby. Ostnatý drát symbolizuje překážky a hranice."
-                title="Detail rezavého ostnatého drátu"
-                data-description="Detailní pohled na rezavý ostnatý drát s rozmazaným pozadím. Drát je v popředí, což zdůrazňuje jeho strukturu a symboliku jako překážky či ochrany."
+                src="/images/hejnice-1938.webp" 
+                alt="Hejnice v roce 1938"
+                title="Hejnice v roce 1938"
                 class="w-full h-full object-cover"
               />
               <div class="absolute inset-0 bg-slate-950/40"></div>
             </div>
-            <div class="p-8 flex flex-col justify-center">
-              <p class="text-slate-400 text-sm mb-2">Akce již proběhla. Připravujeme další akce.</p>
+            <div class="p-8 flex flex-col justify-center md:col-span-3">
+              <p class="text-accent text-sm font-medium mb-2">Tuto akci <span class="font-semibold uppercase">Doporučujeme</span></p>
               <div class="text-xs text-slate-400 uppercase tracking-wide mb-3">
-                10. PROSINCE 2025, 12:00
+                26. ÚNORA 2026, 17:00
               </div>
               <h3 class="text-2xl md:text-3xl font-bold text-slate-50 mb-4 group-hover:text-accent transition-colors">
-                Den Lidských práv
+                Hejnice v roce 1938
               </h3>
               <p class="text-slate-300 text-base mb-6 leading-relaxed">
-                Katedra historie ve spolupráci s Krajskou vědeckou knihovnou v Liberci, Memoriae Loci a Libereckým krajem pořádá již čtvrtý ročník Dne lidských práv.
+                Přednáška z cyklu Památky kolem nás. Pořádá NPÚ a Krajská vědecká knihovna v Liberci. Přednáší Mgr. Milan Votava a PhDr. Ivan Fuksa. Místo: KVKLI, Velký sál, 2. patro. Vstupné dobrovolné.
               </p>
-              <div class="flex flex-wrap gap-4">
+              <div class="flex flex-wrap gap-6">
                 <a 
-                  href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Den+Lidských+práv&dates=20251210T110000Z/20251210T140000Z&details=Katedra+historie+ve+spolupráci+s+Krajskou+vědeckou+knihovnou+v+Liberci%2C+Memoriae+Loci+a+Libereckým+krajem+pořádá+již+čtvrtý+ročník+Dne+lidských+práv.&location=Krajská+vědecká+knihovna+v+Liberci%2C+Liberec&ctz=Europe%2FPrague"
+                  href="https://www.google.com/calendar/render?action=TEMPLATE&text=Hejnice+v+roce+1938&dates=20260226T160000Z/20260226T173000Z&details=Přednáška+z+cyklu+Památky+kolem+nás.+Pořádá+NPÚ+a+KVKLI.+Místo%3A+KVKLI%2C+Velký+sál%2C+2.+patro.&location=KVKLI%2C+Liberec"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-50 bg-slate-700 hover:bg-slate-600 rounded transition-colors"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-500 text-slate-300 text-sm font-medium hover:border-accent hover:text-accent transition-colors"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   Přidat do kalendáře
                 </a>
                 <a 
-                  href="https://khi.fp.tul.cz/cinnost/prednasky-pro-verejnost/385-lidprava" 
+                  href="https://www.kvkli.cz/akce/id:104999/hejnice-v-roce-1938" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center text-accent text-sm font-semibold hover:underline"
+                  class="inline-flex items-center text-slate-50 text-sm font-semibold hover:text-accent hover:underline w-fit"
                 >
-                  Více informací →
+                  Více informací na kvkli.cz →
                 </a>
               </div>
             </div>
@@ -302,7 +306,7 @@ for (let i = -2; i <= 2; i++) {
                     return img;
                   })()} 
                   alt={article.title}
-                  class="w-full h-48 object-cover rounded-lg opacity-80 group-hover:opacity-100 transition-opacity"
+                  class={`w-full h-48 object-cover rounded-lg opacity-80 group-hover:opacity-100 transition-opacity ${article.slug === 'kdyz-padaly-bomby-utikali-jsme-do-poli' ? 'object-top' : ''}`}
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent rounded-lg"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-4">
@@ -340,7 +344,7 @@ for (let i = -2; i <= 2; i++) {
                   return img;
                 })()} 
                 alt={article.title}
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                class={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 ${article.slug === 'kdyz-padaly-bomby-utikali-jsme-do-poli' ? 'object-top' : ''}`}
               />
             </div>
             <div class="p-6">

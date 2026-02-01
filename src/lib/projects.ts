@@ -30,7 +30,7 @@ export const projects: Project[] = [
     heroImageAlt: 'Muž v tradičním oblečení stojí s kytarou před horskou krajinou, v pozadí viditelné hory a les',
     heroImageTitle: 'Muž s kytarou v horách',
     heroImageDescription: 'Černobílá fotografie muže v tradičním oblečení, který drží kytaru. Stojí před malebnou horskou krajinou s lesem a horami v pozadí, což vytváří nostalgickou atmosféru.',
-    heroImagePosition: '50% 0%',
+    heroImagePosition: 'top',
     longDescription: 'Magazín zaměřený na dokumentaci příběhů, historie a lidí spojených s Libercem a jeho okolím. Přinášíme články o významných událostech, osobnostech a místech, která formovala historii regionu.',
     subtitle: 'Magazín',
   },

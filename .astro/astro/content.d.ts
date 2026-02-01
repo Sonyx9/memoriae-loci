@@ -141,54 +141,19 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"articles": {
-"cesko-nemecke-vztahy-liberec.md": {
-	id: "cesko-nemecke-vztahy-liberec.md";
-  slug: "cesko-nemecke-vztahy-liberec";
+"kdyz-padaly-bomby-utikali-jsme-do-poli.md": {
+	id: "kdyz-padaly-bomby-utikali-jsme-do-poli.md";
+  slug: "kdyz-padaly-bomby-utikali-jsme-do-poli";
   body: string;
   collection: "articles";
-  data: InferEntrySchema<"articles">
-} & { render(): Render[".md"] };
-"historie-libereckeho-skautingu.md": {
-	id: "historie-libereckeho-skautingu.md";
-  slug: "historie-libereckeho-skautingu";
-  body: string;
-  collection: "articles";
-  data: InferEntrySchema<"articles">
-} & { render(): Render[".md"] };
-"kameny-zmizelych-liberec.md": {
-	id: "kameny-zmizelych-liberec.md";
-  slug: "kameny-zmizelych-liberec";
-  body: string;
-  collection: "articles";
-  data: InferEntrySchema<"articles">
-} & { render(): Render[".md"] };
-"liberec-za-valky.md": {
-	id: "liberec-za-valky.md";
-  slug: "liberec-za-valky";
-  body: string;
-  collection: "articles";
-  data: InferEntrySchema<"articles">
+  data: any
 } & { render(): Render[".md"] };
 "politicky-proces-liberecke-skauty-1952.md": {
 	id: "politicky-proces-liberecke-skauty-1952.md";
   slug: "politicky-proces-liberecke-skauty-1952";
   body: string;
   collection: "articles";
-  data: InferEntrySchema<"articles">
-} & { render(): Render[".md"] };
-"ukazkovy-clanek.md": {
-	id: "ukazkovy-clanek.md";
-  slug: "ukazkovy-clanek";
-  body: string;
-  collection: "articles";
-  data: InferEntrySchema<"articles">
-} & { render(): Render[".md"] };
-"zapomenuta-mista-liberec.md": {
-	id: "zapomenuta-mista-liberec.md";
-  slug: "zapomenuta-mista-liberec";
-  body: string;
-  collection: "articles";
-  data: InferEntrySchema<"articles">
+  data: any
 } & { render(): Render[".md"] };
 };
 
@@ -200,5 +165,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("./../../src/content/config.js");
+	export type ContentConfig = never;
 }

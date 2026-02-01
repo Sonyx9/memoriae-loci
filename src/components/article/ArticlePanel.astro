@@ -11,9 +11,11 @@ interface Props {
   readingTime?: number;
   author?: string;
   sources?: string[];
+  /** Text tlačítka místo „Debata“ (např. „Poslechnout si rozhovor“) */
+  debataLabel?: string;
 }
 
-const { title, excerpt, publishedAt, project, tags = [], readingTime, author, sources = [] } = Astro.props;
+const { title, excerpt, publishedAt, project, tags = [], readingTime, author, sources = [], debataLabel = 'Debata' } = Astro.props;
 const projectData = project ? projects.find(p => p.slug === project) : null;
 ---
 
@@ -92,9 +94,9 @@ const projectData = project ? projects.find(p => p.slug === project) : null;
       <div class="flex flex-col sm:flex-row gap-2">
         <a 
           href="#article-audio-block" 
-          class="hidden sm:flex flex-1 text-center px-4 py-2.5 text-xs uppercase tracking-wider text-slate-300 border border-slate-700/50 hover:border-accent hover:text-accent transition-all font-light rounded-lg"
+          class="hidden sm:flex flex-1 items-center justify-center px-4 py-2.5 text-xs uppercase tracking-wider text-slate-300 border border-slate-700/50 hover:border-accent hover:text-accent transition-all font-light rounded-lg"
         >
-          Debata
+          {debataLabel}
         </a>
         <a 
           href="#podporte-nas" 

@@ -1,0 +1,217 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import { getPastEventsForPage } from '../../lib/pastEvents';
+
+const { events, totalPages, currentPage, total } = getPastEventsForPage(1);
+---
+
+<BaseLayout 
+  title="Proběhlé akce - Memoriae Loci" 
+  description="Přehled proběhlých akcí pořádaných nebo spolupořádaných Memoriae Loci"
+>
+  <Navigation />
+  
+  <main class="pt-16 min-h-screen">
+    <!-- Hero -->
+    <section class="bg-slate-900 py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-5xl md:text-6xl font-bold text-slate-50 mb-6">Proběhlé akce</h1>
+        <p class="text-xl text-slate-300 max-w-2xl">
+          Přehled akcí, které jsme doporučovali, uspořádali nebo na nichž jsme se podíleli.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Boxy proběhlých akcí – 5 na stránku -->
+    <section class="bg-slate-950 py-16 border-t border-slate-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-10">
+          {events.map((akce) => (
+            <div class="relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-accent/50 transition-all group">
+              <img 
+                src="/images/logo-footer.png" 
+                alt="Memoriae Loci" 
+                class="absolute top-8 right-8 z-10 h-12 w-auto brightness-0 invert opacity-90 group-hover:brightness-100 group-hover:invert-0 transition-[filter,opacity] duration-300"
+              />
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+                <div class="aspect-video md:aspect-auto bg-slate-700 relative overflow-hidden">
+                  <img 
+                    src={akce.image} 
+                    alt={akce.imageAlt}
+                    class="w-full h-full object-cover grayscale"
+                  />
+                  <div class="absolute inset-0 bg-slate-950/40"></div>
+                </div>
+                <div class="p-8 flex flex-col justify-center">
+                  <p class="text-slate-300 text-lg md:text-xl font-medium mb-2">Akce již proběhla.</p>
+                  <div class="text-xs text-slate-400 uppercase tracking-wide mb-3">
+                    {akce.date}
+                  </div>
+                  <h2 class="text-2xl md:text-3xl font-bold text-slate-50 mb-4 group-hover:text-accent transition-colors">
+                    {akce.title}
+                  </h2>
+                  <p class="text-slate-300 text-base mb-6 leading-relaxed">
+                    {akce.description}
+                  </p>
+                  {akce.moreUrl && (
+                    <a 
+                      href={akce.moreUrl} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center text-accent text-sm font-semibold hover:underline w-fit"
+                    >
+                      Více informací →
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {events.length === 0 && (
+          <p class="text-slate-400 text-center py-12">Zatím zde nejsou žádné proběhlé akce.</p>
+        )}
+        <!-- Stránkování – pouze u seznamu akcí -->
+        {total > 0 && totalPages > 1 && (
+          <nav class="mt-12 flex items-center justify-center gap-4" aria-label="Stránkování proběhlých akcí">
+            {currentPage > 1 && (
+              <a 
+                href={currentPage === 2 ? '/probehle-akce' : `/probehle-akce/${currentPage - 1}`}
+                class="px-4 py-2 text-slate-300 border border-slate-600 rounded-lg hover:bg-slate-800 hover:text-slate-50 transition-colors"
+              >
+                ← Předchozí
+              </a>
+            )}
+            <span class="text-slate-400 text-sm">
+              Stránka {currentPage} / {totalPages}
+            </span>
+            {currentPage < totalPages && (
+              <a 
+                href={`/probehle-akce/${currentPage + 1}`}
+                class="px-4 py-2 text-slate-300 border border-slate-600 rounded-lg hover:bg-slate-800 hover:text-slate-50 transition-colors"
+              >
+                Další →
+              </a>
+            )}
+          </nav>
+        )}
+      </div>
+    </section>
+
+    <!-- Vaše podpora má smysl -->
+    <section class="bg-slate-950 pt-8 pb-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-accent/50 transition-all group">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+            <div class="aspect-video md:aspect-auto bg-slate-700 relative overflow-hidden">
+              <img 
+                src="/images/podporte-nas.webp" 
+                alt="Historický soudní proces s obviněným stojícím před soudem, kolem něj soudci a diváci"
+                title="Historický soudní proces v soudní síni"
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-slate-950/50"></div>
+            </div>
+            <div class="p-8 flex flex-col justify-center">
+              <h3 class="text-2xl md:text-3xl font-bold text-slate-50 mb-4 group-hover:text-accent transition-colors">
+                Vaše podpora má smysl
+              </h3>
+              <p class="text-slate-300 text-base mb-6 leading-relaxed">
+                Každý příspěvek pomáhá zachovat příběhy, které by jinak zmizely. Děkujeme, že jste s námi.
+              </p>
+              <div class="space-y-4 mb-6">
+                <div>
+                  <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">Č. účtu</div>
+                  <div class="flex items-center gap-3">
+                    <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">384868895/0600</code>
+                    <button 
+                      id="copy-account-btn-probehle-akce"
+                      class="text-slate-400 hover:text-accent transition-colors p-1.5"
+                      aria-label="Kopírovat číslo účtu"
+                    >
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">IBAN</div>
+                  <div class="overflow-x-auto -mx-1 px-1">
+                    <code class="inline-block text-sm sm:text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700 whitespace-nowrap min-w-0">CZ84 0600 0000 0003 8486 8895</code>
+                  </div>
+                </div>
+                <div>
+                  <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">BIC</div>
+                  <code class="text-base font-mono text-slate-50 bg-slate-900/50 px-3 py-1.5 rounded border border-slate-700">AGBACZPP</code>
+                </div>
+              </div>
+              <a 
+                href="/podporte-nas" 
+                class="inline-flex items-center text-accent text-sm font-semibold hover:underline w-fit"
+              >
+                Více informací o podpoře →
+              </a>
+            </div>
+            <div class="p-8 flex flex-col justify-center items-center border-t md:border-t-0 md:border-l border-slate-700">
+              <div class="text-xs uppercase tracking-wide text-slate-400 mb-3 text-center">QR platba</div>
+              <img 
+                src="/images/qr-platba.jpg" 
+                alt="QR platba"
+                class="w-48 h-48 bg-white p-2 rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partneři vybraných akcí -->
+    <section class="relative py-16 bg-slate-950">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl">
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-50 mb-8 uppercase tracking-wide">
+            Partneři vybraných akcí
+          </h2>
+          <div class="flex flex-wrap items-center gap-8 md:gap-12">
+            <a href="https://www.kraj-lbc.cz" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+              <img src="/images/logo-liberecky-kraj.png" alt="Liberecký kraj" class="h-12 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
+            </a>
+            <a href="https://www.kvkli.cz" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+              <img src="/images/logo-kvkli.svg" alt="Krajská vědecká knihovna v Liberci" class="h-12 opacity-80 hover:opacity-100 transition-opacity" />
+            </a>
+            <a href="https://www.fp.tul.cz" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+              <img src="https://www.fp.tul.cz/templates/yootheme/cache/d8/FP-znacka-d8bb453b.png" alt="Fakulta přírodovědně-humanitní a pedagogická TUL" class="h-12 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
+            </a>
+            <a href="https://www.academiaknihy.cz" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+              <img src="https://www.academiaknihy.cz/public/dist/images/header-logo-cz--inverse.svg" alt="Nakladatelství Academia" class="h-12 opacity-80 hover:opacity-100 transition-opacity" />
+            </a>
+            <a href="https://www.kraj-lbc.cz" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+              <img src="/images/logo-liberecky-kraj-6-bile.png" alt="Liberecký kraj" class="h-20 opacity-80 hover:opacity-100 transition-opacity" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyBtn = document.getElementById('copy-account-btn-probehle-akce');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('384868895/0600').then(() => {
+          const originalHTML = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
+          copyBtn.classList.add('text-accent');
+          setTimeout(() => { copyBtn.innerHTML = originalHTML; copyBtn.classList.remove('text-accent'); }, 2000);
+        });
+      });
+    }
+  });
+</script>

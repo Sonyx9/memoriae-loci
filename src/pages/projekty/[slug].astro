@@ -189,7 +189,7 @@ const projectArticles = await getArticlesByProject(project.slug);
                         return img;
                       })()} 
                       alt={article.title}
-                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      class={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 ${article.slug === 'kdyz-padaly-bomby-utikali-jsme-do-poli' ? 'object-top' : ''}`}
                     />
                   </div>
                   <div class="p-6">
