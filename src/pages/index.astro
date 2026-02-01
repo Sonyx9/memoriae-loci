@@ -7,7 +7,14 @@ import { getPublishedArticles } from '../lib/articles';
 import { projects } from '../lib/projects';
 import { formatDate } from '../lib/utils';
 
-const latestArticles = (await getPublishedArticles()).slice(0, 6);
+// Článek "Když padaly bomby" je vždy na první pozici na homepage
+const allPublished = await getPublishedArticles();
+const bombySlug = 'kdyz-padaly-bomby-utikali-jsme-do-poli';
+const bombyArticle = allPublished.find((a) => a.slug === bombySlug);
+const others = allPublished.filter((a) => a.slug !== bombySlug);
+const latestArticles = bombyArticle
+  ? [bombyArticle, ...others].slice(0, 6)
+  : allPublished.slice(0, 6);
 const featuredProjects = projects.slice(0, 4);
 
 // Get current date info
@@ -37,7 +44,7 @@ for (let i = -2; i <= 2; i++) {
   <Navigation />
   
   <!-- Hero Section -->
-  <section class="relative min-h-screen flex flex-col overflow-hidden -mt-16">
+  <section class="group relative min-h-screen flex flex-col overflow-hidden -mt-16">
     <!-- Background Image - covers entire hero section including bottom links -->
     <div class="absolute inset-0 z-0 w-full h-full">
       <img 
@@ -45,7 +52,7 @@ for (let i = -2; i <= 2; i++) {
         alt="Skupina obyvatel shromážděná před improvizovaným informačním centrem v Liberci během srpnových událostí roku 1968."
         title="Liberec 1968 – obyvatelé u informačního centra během invaze vojsk Varšavské smlouvy"
         data-description="Historická fotografie z Liberce zachycující shromáždění obyvatel u informačního centra během dramatických událostí srpna 1968 a invaze vojsk Varšavské smlouvy."
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-500"
       />
       <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950/70"></div>
     </div>
@@ -155,7 +162,7 @@ for (let i = -2; i <= 2; i++) {
                 src="/images/hejnice-1938.webp" 
                 alt="Hejnice v roce 1938"
                 title="Hejnice v roce 1938"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-500"
               />
               <div class="absolute inset-0 bg-slate-950/40"></div>
             </div>
@@ -167,7 +174,7 @@ for (let i = -2; i <= 2; i++) {
               <h3 class="text-2xl md:text-3xl font-bold text-slate-50 mb-4 group-hover:text-accent transition-colors">
                 Hejnice v roce 1938
               </h3>
-              <p class="text-slate-300 text-base mb-6 leading-relaxed">
+              <p class="text-slate-300 text-base mb-6 leading-relaxed [@media(min-width:768px)_and_(max-width:1023px)_and_(orientation:portrait)]:hidden">
                 Přednáška z cyklu Památky kolem nás. Pořádá NPÚ a Krajská vědecká knihovna v Liberci. Přednáší Mgr. Milan Votava a PhDr. Ivan Fuksa. Místo: KVKLI, Velký sál, 2. patro. Vstupné dobrovolné.
               </p>
               <div class="flex flex-wrap gap-6">
@@ -221,7 +228,7 @@ for (let i = -2; i <= 2; i++) {
                 alt={project.heroImageAlt || project.name}
                 title={project.heroImageTitle}
                 {...(project.heroImageDescription ? { 'data-description': project.heroImageDescription } : {})}
-                class="block w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                class="block w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500"
                 style={project.heroImagePosition ? { objectPosition: project.heroImagePosition } : undefined}
               />
               <div class="absolute inset-0 bg-slate-950/50"></div>
@@ -235,7 +242,7 @@ for (let i = -2; i <= 2; i++) {
                   {project.subtitle}
                 </div>
               )}
-              <p class="text-slate-300 text-base mb-6 line-clamp-3 flex-grow">{project.description}</p>
+              <p class="text-slate-300 text-base mb-6 line-clamp-3 flex-grow [@media(min-width:768px)_and_(max-width:1023px)_and_(orientation:portrait)]:hidden">{project.description}</p>
               <span class="text-accent font-semibold text-lg group-hover:underline mt-auto">
                 {index === 3 ? 'Připravujeme' : 'Zjistit více →'}
               </span>
@@ -250,12 +257,12 @@ for (let i = -2; i <= 2; i++) {
   </section>
   
   <!-- Cinematic Section with Articles -->
-  <section class="relative overflow-hidden" style="padding-top: 8rem; padding-bottom: 1rem; margin-top: -48px;">
+  <section class="group relative overflow-hidden" style="padding-top: 8rem; padding-bottom: 1rem; margin-top: -48px;">
     <div class="absolute inset-0 z-0">
       <img 
         src="/images/cinematic.jpg" 
         alt="Cinematic background" 
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-500"
       />
       <div class="absolute inset-0 bg-gradient-to-b from-slate-950/95 via-slate-950/90 to-slate-950"></div>
       <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent"></div>
@@ -306,7 +313,7 @@ for (let i = -2; i <= 2; i++) {
                     return img;
                   })()} 
                   alt={article.title}
-                  class={`w-full h-48 object-cover rounded-lg opacity-80 group-hover:opacity-100 transition-opacity ${article.slug === 'kdyz-padaly-bomby-utikali-jsme-do-poli' ? 'object-top' : ''}`}
+                  class={`w-full h-48 object-cover rounded-lg opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 ${article.slug === 'kdyz-padaly-bomby-utikali-jsme-do-poli' ? 'object-top' : ''}`}
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent rounded-lg"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-4">
@@ -344,7 +351,7 @@ for (let i = -2; i <= 2; i++) {
                   return img;
                 })()} 
                 alt={article.title}
-                class={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 ${article.slug === 'kdyz-padaly-bomby-utikali-jsme-do-poli' ? 'object-top' : ''}`}
+                class={`w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ${article.slug === 'kdyz-padaly-bomby-utikali-jsme-do-poli' ? 'object-top' : ''}`}
               />
             </div>
             <div class="p-6">
@@ -354,7 +361,7 @@ for (let i = -2; i <= 2; i++) {
               <h3 class="text-xl font-bold text-slate-50 mb-3 group-hover:text-accent transition-colors">
                 {article.title}
               </h3>
-              <p class="text-slate-300 text-sm line-clamp-3">{article.excerpt}</p>
+              <p class="text-slate-300 text-sm line-clamp-3 [@media(min-width:768px)_and_(max-width:1023px)_and_(orientation:portrait)]:hidden">{article.excerpt}</p>
             </div>
           </a>
         ))}
