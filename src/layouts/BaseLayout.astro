@@ -5,9 +5,12 @@ interface Props {
   image?: string;
 }
 
+import { toHttps } from '../lib/utils';
+
 const { title, description = "Memoriae Loci - Paměť míst. Dokumentujeme příběhy a historii míst, která mají význam.", image } = Astro.props;
 const siteURL = Astro.site || 'https://memoriaeloci.cz';
 const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const imageUrl = image ? new URL(toHttps(image), siteURL).href : undefined;
 ---
 
 <!doctype html>
@@ -23,7 +26,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteURL);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     
-    {image && <meta property="og:image" content={new URL(image, siteURL).href} />}
+    {imageUrl && <meta property="og:image" content={imageUrl} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />

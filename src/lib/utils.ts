@@ -21,3 +21,11 @@ export function slugify(text: string): string {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 }
+
+/** Převádí URL obrázků na HTTPS (relativní cesty nechá beze změny). */
+export function toHttps(url: string | undefined): string {
+  if (!url || typeof url !== 'string') return url || '';
+  const trimmed = url.trim();
+  if (trimmed.startsWith('http://')) return 'https://' + trimmed.slice(7);
+  return trimmed;
+}

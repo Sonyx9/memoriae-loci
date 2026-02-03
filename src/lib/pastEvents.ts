@@ -1,3 +1,5 @@
+import { toHttps } from './utils';
+
 export const EVENTS_PER_PAGE = 5;
 
 export interface PastEvent {
@@ -32,6 +34,10 @@ export function getPastEventsForPage(page: number): {
   const totalPages = Math.max(1, Math.ceil(total / EVENTS_PER_PAGE));
   const currentPage = Math.max(1, Math.min(page, totalPages));
   const start = (currentPage - 1) * EVENTS_PER_PAGE;
-  const events = allPastEvents.slice(start, start + EVENTS_PER_PAGE);
+  const events = allPastEvents.slice(start, start + EVENTS_PER_PAGE).map((e) => ({
+    ...e,
+    image: toHttps(e.image),
+    moreUrl: e.moreUrl ? toHttps(e.moreUrl) : undefined,
+  }));
   return { events, totalPages, currentPage, total };
 }

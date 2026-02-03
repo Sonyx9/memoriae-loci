@@ -1,6 +1,7 @@
 import type { Article } from './types';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import { toHttps } from './utils';
 
 export async function getArticles(): Promise<Article[]> {
   const entries = await getCollection('articles');
@@ -13,17 +14,17 @@ export async function getArticles(): Promise<Article[]> {
     status: entry.data.status,
     excerpt: entry.data.excerpt,
     content: entry.body, // Raw markdown - will be rendered in template
-    cover: entry.data.cover,
+    cover: entry.data.cover ? { src: toHttps(entry.data.cover.src), alt: entry.data.cover.alt } : undefined,
     coverImage: (() => {
       const coverImg = (entry.data.coverImage && entry.data.coverImage.trim()) || entry.data.cover?.src;
       // Ignore non-existent files and placeholder.svg, use hero image as fallback
       if (!coverImg || coverImg === '/images/placeholder.svg' || coverImg === '/images/liberec.png' || coverImg === '/images/articles/example.jpg') {
         return '/images/liberec-hero.webp';
       }
-      return coverImg;
+      return toHttps(coverImg);
     })(),
     heroCaption: entry.data.heroCaption,
-    gallery: entry.data.gallery,
+    gallery: entry.data.gallery?.map((g) => ({ src: toHttps(g.src), alt: g.alt })) ?? undefined,
     project: entry.data.project,
     tags: entry.data.tags,
     author: entry.data.author,

@@ -9,7 +9,7 @@ import SupportCard from '../../components/SupportCard.astro';
 import Footer from '../../components/Footer.astro';
 import { getArticleEntry, getRelatedArticles, getPublishedArticles } from '../../lib/articles';
 import { projects } from '../../lib/projects';
-import { estimateReadingTime } from '../../lib/utils';
+import { estimateReadingTime, toHttps } from '../../lib/utils';
 import { getCollection } from 'astro:content';
 
 // Generate static paths for all published articles
@@ -52,18 +52,18 @@ const article = {
     if (!coverImg || coverImg === '/images/placeholder.svg' || coverImg === '/images/liberec.png' || coverImg === '/images/articles/example.jpg') {
       return '/images/liberec-hero.webp';
     }
-    return coverImg;
+    return toHttps(coverImg);
   })(),
-  cover: entry.data.cover,
+  cover: entry.data.cover ? { src: toHttps(entry.data.cover.src), alt: entry.data.cover.alt } : undefined,
   heroCaption: entry.data.heroCaption,
-  gallery: entry.data.gallery,
+  gallery: entry.data.gallery?.map((g) => ({ src: toHttps(g.src), alt: g.alt })) ?? undefined,
   project: entry.data.project,
   tags: entry.data.tags || [],
   author: entry.data.author,
   sources: entry.data.sources || [],
   audioUrl: entry.data.audioUrl,
   youtubeId: entry.data.youtubeId,
-  infographic: entry.data.infographic,
+  infographic: entry.data.infographic ? { src: toHttps(entry.data.infographic.src), alt: entry.data.infographic.alt } : undefined,
 };
 
 const relatedArticles = await getRelatedArticles(article, 3);
@@ -71,7 +71,7 @@ const readingTime = estimateReadingTime(entry.body);
 
 // Get cover image for OG
 const ogImage = article.cover?.src || article.coverImage;
-const ogImageUrl = ogImage ? new URL(ogImage, Astro.site || 'https://memoriaeloci.cz').href : undefined;
+const ogImageUrl = ogImage ? new URL(toHttps(ogImage), Astro.site || 'https://memoriaeloci.cz').href : undefined;
 ---
 
 <BaseLayout 
