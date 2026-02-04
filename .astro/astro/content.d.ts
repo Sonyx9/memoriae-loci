@@ -146,14 +146,14 @@ declare module 'astro:content' {
   slug: "kdyz-padaly-bomby-utikali-jsme-do-poli";
   body: string;
   collection: "articles";
-  data: any
+  data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
 "politicky-proces-liberecke-skauty-1952.md": {
 	id: "politicky-proces-liberecke-skauty-1952.md";
   slug: "politicky-proces-liberecke-skauty-1952";
   body: string;
   collection: "articles";
-  data: any
+  data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
 };
 
@@ -165,5 +165,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("./../../src/content/config.js");
 }

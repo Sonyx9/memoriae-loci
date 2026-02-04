@@ -8,6 +8,7 @@ tags: ["Liberec", "Druhá světová válka", "Paměť", "Nucená práce", "Miros
 cover:
   src: "/images/liberecke-pribehy.webp"
   alt: "Liberecké příběhy – paměť místa"
+audioUrl: "https://media.memoriaeloci.cz/audio/Rozhovor-s-dedou.mp3"
 sources:
   - "Rozhovor s Miroslavem Palmem. Tazatel: Lukáš Koula. Liberec, 18. prosince 2011."
 ---

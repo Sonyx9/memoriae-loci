@@ -177,6 +177,7 @@ const ogImageUrl = ogImage ? new URL(toHttps(ogImage), Astro.site || 'https://me
                 preload="none"
                 style="min-height: 48px;"
               >
+                <source src={article.audioUrl} type="audio/wav" />
                 <source src={article.audioUrl} type="audio/mp4" />
                 <source src={article.audioUrl} type="audio/mpeg" />
                 <source src={article.audioUrl} type="audio/ogg" />
