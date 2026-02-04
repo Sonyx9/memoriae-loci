@@ -9,27 +9,40 @@ cover:
   src: "/images/liberecke-pribehy.webp"
   alt: "Liberecké příběhy – paměť místa"
 audioUrl: "https://media.memoriaeloci.cz/audio/Rozhovor-s-dedou.mp3"
+youtubeId: "uWYlYxCU4UI"
+infographic:
+  src: "https://media.memoriaeloci.cz/images/blog/kdyz-padaly-bomby-souhrn.webp"
+  alt: "Když padaly bomby – souhrn"
 sources:
   - "Rozhovor s Miroslavem Palmem. Tazatel: Lukáš Koula. Liberec, 18. prosince 2011."
 ---
 
 Miroslav Palm se narodil 29. února 1924 a zemřel ve věku 99 let. Jeho hlas, jeho paměť, jeho příběh dnes tvoří důležitou součást živé paměti.
 
+
 Ačkoliv nacistické Německo formálně uznalo autonomii Protektorátu Čechy a Morava, šlo pouze o prostředek k rychlému začlenění českých zemí do říšského prostoru. Konfiskací majetku a tzv. arizací se postupně měnila vlastnická struktura průmyslu a celá ekonomika se podřizovala válečným potřebám. Jak později uvedl bývalý ministr financí Josef Kalfus, šlo o „systematicky organizované lupičství“.
+
 
 To se týkalo nejen majetku, ale i lidí. Už v roce 1939 vznikaly podle německého vzoru pracovní úřady, a brzy nato byla zavedena pracovní povinnost pro mladé muže. Od roku 1941 se tato povinnost rozšířila na všechny osoby ve věku od 18 do 50 let. Úřady získaly kontrolu nad přijímáním i propouštěním pracovníků a měly právo přesouvat pracovní síly podle potřeby.
 
+
 Češi byli v nacistickém systému v podivném postavení — formálně příslušníci Říše, ale v praxi považovaní za cizince. Odhadovaný počet totálně nasazených Čechů v Německu se dnes pohybuje v řádu stovek tisíc.
+
 
 Pamětník, se kterým jsme vedli rozhovor, byl odveden v roce 1942 do Freiburgu. Pracoval ve zbrojovce, kde se údajně vyráběly i součástky pro rakety V1. Továrna se pravidelně stával terčem bombardování. Spojenecké nálety přicházely nejprve jen občas, později i dvakrát denně. Pamětník si vzpomíná na svůj první zážitek, kdy utíkal do polí a myslel si, že bomba padá přímo na něj. Kryty sice existovaly, ale byly považovány za nebezpečné — pokud se zřítily, lidé se uvnitř udusili. Proto utíkali raději do otevřené krajiny, do polí nebo lesů.
 
+
 V okolí Freiburgu se nacházelo i maskované německé letiště, ale ke konci války už nebylo schopné poskytnout účinnou obranu. Podle pamětníka se německá letadla proti spojeneckým náletům nakonec už ani nesnažila zasahovat.
+
 
 Podmínky života byly tvrdé. Ubytování v lágrech bylo špatné, plné blech a štěnic. Pomohla až rtuťová mast z lékárny. Strava byla skromná — nejčastěji tuřín nebo zelí. Díky znalosti němčiny se pamětník mohl stravovat v kantýně s německými pracovníky, kde bylo jídlo o něco lepší. Přesto si pamatuje, že i když si mohl vydělat slušné peníze, neměl je za co utratit — nebylo co koupit.
 
+
 Zmínil také kontakty s místními ženami, jejichž muži byli na frontě. Kontroly byly časté, ale často se z nich dalo utéct oknem — jak říká, tyto kontroly prováděli většinou starší muži, kteří už měli své za sebou.
 
+
 Ke konci války se rozhodl utéct domů. Skrýval se ve dne v lese, v noci se vracel domů. Později se setkal s partyzány, ke kterým se přidal. Po osvobození se podílel na zřizování internačního tábora pro německé vojáky, kteří prchali z fronty. Některé z nich pak předávali sovětské armádě jako válečné zajatce.
+
 
 ## Přepis rozhovoru
 

@@ -146,6 +146,13 @@ const ogImageUrl = ogImage ? new URL(toHttps(ogImage), Astro.site || 'https://me
           opacity: 0 !important;
         }
         /* H2 v článku: větší, tučné, oddělené od textu nad nimi ( :global() aby styly dopadly na H2 z markdownu ) */
+        /* Mezery mezi odstavci v článku */
+        .article-body :global(p) {
+          margin-bottom: 2rem !important;
+        }
+        .article-body :global(p:last-child) {
+          margin-bottom: 0 !important;
+        }
         .article-body :global(h2) {
           font-size: 1.125rem !important; /* poloviční – mobil */
           font-weight: 700 !important;
@@ -165,7 +172,7 @@ const ogImageUrl = ogImage ? new URL(toHttps(ogImage), Astro.site || 'https://me
         <div id="article-audio-block" class="article-media-block my-10 max-w-7xl mx-auto rounded-xl border border-slate-700 bg-slate-800/70 overflow-hidden shadow-lg">
           <div class="px-5 py-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row sm:items-center gap-4">
             <div class="flex-shrink-0 sm:min-w-[200px]">
-              <h3 class="text-lg font-semibold text-slate-50 leading-tight">Poslechněte si shrnutí článku</h3>
+              <h3 class="text-lg font-semibold text-slate-50 leading-tight">Přehrát</h3>
               <p class="text-sm text-slate-400 leading-tight mt-1">Zvuková stopa – přehrávání přímo na webu</p>
             </div>
             <div class="flex-1 min-w-0">
@@ -337,6 +344,11 @@ const ogImageUrl = ogImage ? new URL(toHttps(ogImage), Astro.site || 'https://me
     color: rgb(226 232 240);
   }
 
+  /* Kotva „Poslechnout si rozhovor“ – scroll s rezervou pod fixní menu */
+  #debata {
+    scroll-margin-top: 5rem;
+  }
+
   /* Odstranit oddělovače pod zvukovou stopou */
   #article-audio-block + hr {
     display: none !important;
@@ -404,13 +416,27 @@ const ogImageUrl = ogImage ? new URL(toHttps(ogImage), Astro.site || 'https://me
       });
     }
     
-    // Zvuková stopa (shrnutí) – vložit pod první odstavec, aby byl přehrávač hned vidět
+    // Zvuková stopa (shrnutí) – u článků s „Přepis rozhovoru“ vložit nad ten nadpis, jinak pod první odstavec
     const audioBlock = document.getElementById('article-audio-block');
     if (article && audioBlock) {
-      const firstP = article.querySelector('p');
-      const insertAfter = firstP || article.querySelector('h1, h2') || article.firstElementChild;
-      if (insertAfter) {
-        insertAfter.after(audioBlock);
+      const prepisH2 = Array.from(article.querySelectorAll('h2')).find(h => h.textContent?.trim() === 'Přepis rozhovoru');
+      if (prepisH2) {
+        // Obálka s kotvou #debata: nadpis „Poslechnout rozhovor“ + audio (scroll sem po kliku na tlačítko)
+        const debataWrap = document.createElement('div');
+        debataWrap.id = 'debata';
+        debataWrap.className = 'scroll-mt-20 max-w-7xl mx-auto';
+        const heading = document.createElement('h2');
+        heading.className = 'text-slate-100 font-serif font-bold text-2xl md:text-3xl mb-6 mt-14';
+        heading.textContent = 'Poslechnout rozhovor';
+        prepisH2.parentNode.insertBefore(debataWrap, prepisH2);
+        debataWrap.appendChild(heading);
+        debataWrap.appendChild(audioBlock);
+      } else {
+        const firstP = article.querySelector('p');
+        const insertAfter = firstP || article.querySelector('h1, h2') || article.firstElementChild;
+        if (insertAfter) {
+          insertAfter.after(audioBlock);
+        }
       }
       // Odstranit hr element (oddělovač) hned po audio bloku (pokud se ještě objevil)
       const nextSibling = audioBlock.nextElementSibling;

@@ -93,8 +93,8 @@ const projectData = project ? projects.find(p => p.slug === project) : null;
       </div>
       <div class="flex flex-col sm:flex-row gap-2">
         <a 
-          href="#article-audio-block" 
-          class="hidden sm:flex flex-1 items-center justify-center px-4 py-2.5 text-xs uppercase tracking-wider text-slate-300 border border-slate-700/50 hover:border-accent hover:text-accent transition-all font-light rounded-lg"
+          href={debataLabel && debataLabel !== 'Debata' ? '#debata' : '#article-audio-block'}
+          class={`hidden sm:flex flex-1 items-center justify-center px-4 py-2.5 text-xs uppercase tracking-wider transition-all font-light rounded-lg ${debataLabel && debataLabel !== 'Debata' ? 'text-orange-400 border border-orange-500/70 hover:border-orange-400 hover:text-orange-300 bg-orange-500/10' : 'text-slate-300 border border-slate-700/50 hover:border-accent hover:text-accent'}`}
         >
           {debataLabel}
         </a>
