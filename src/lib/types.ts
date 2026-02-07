@@ -6,6 +6,7 @@ export interface Article {
   slug: string;
   date: string;
   publishedAt: string;
+  updatedAt?: string;
   status: 'draft' | 'published';
   excerpt: string;
   content: string;

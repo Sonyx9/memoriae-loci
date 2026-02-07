@@ -7,6 +7,7 @@ const articlesCollection = defineCollection({
     // slug is automatically generated from filename by Astro - do not include in schema
     date: z.string().optional(), // ISO date string
     publishedAt: z.string().optional(), // Alias for date, kept for backward compatibility
+    updatedAt: z.string().optional(), // ISO date – použije se pro lastmod v sitemapě
     status: z.enum(['draft', 'published']).default('draft'),
     excerpt: z.string(),
     cover: z.object({

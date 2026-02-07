@@ -11,6 +11,7 @@ export async function getArticles(): Promise<Article[]> {
     slug: entry.id.replace(/\.md$/, ''), // Astro automatically generates slug from filename (remove .md extension)
     date: entry.data.date || entry.data.publishedAt || '',
     publishedAt: entry.data.publishedAt || entry.data.date || '',
+    updatedAt: entry.data.updatedAt,
     status: entry.data.status,
     excerpt: entry.data.excerpt,
     content: entry.body, // Raw markdown - will be rendered in template
