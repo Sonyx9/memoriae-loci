@@ -107,11 +107,22 @@ tags: ["tag1", "tag2"]
 Obsah článku v Markdown formátu...
 ```
 
+## Sitemapy
+
+Mapy stránek se generují při každém buildu a jsou dostupné na:
+
+- **Index sitemap (odkaz pro vyhledávače):** [https://memoriaeloci.cz/sitemap-index.xml](https://memoriaeloci.cz/sitemap-index.xml)
+- **Stránky:** [https://memoriaeloci.cz/sitemap.xml](https://memoriaeloci.cz/sitemap.xml)
+- **Obrázky:** [https://memoriaeloci.cz/sitemap-images.xml](https://memoriaeloci.cz/sitemap-images.xml)
+- **Videa:** [https://memoriaeloci.cz/sitemap-videos.xml](https://memoriaeloci.cz/sitemap-videos.xml)
+
+V Google Search Console nastavte jako sitemap adresu `https://memoriaeloci.cz/sitemap-index.xml`. Zdroj v projektu: `src/pages/sitemap*.xml.ts`, data z `src/lib/sitemap.ts`.
+
 ## Struktura stránek
 
 - `/` - Homepage
-- `/pribehy` - Výpis článků
-- `/pribehy/[slug]` - Detail článku
+- `/magazin` - Výpis článků
+- `/magazin/[slug]` - Detail článku
 - `/projekty` - Přehled projektů
 - `/projekty/[slug]` - Detail projektu
 - `/o-nas` - O nás

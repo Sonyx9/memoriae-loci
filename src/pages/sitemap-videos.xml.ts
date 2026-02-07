@@ -1,5 +1,6 @@
 /**
- * Sitemap videí – připraveno pro budoucí video obsah (aktuálně prázdný validní urlset)
+ * Sitemap videí – platný pouze pokud existují videa.
+ * Při prázdném seznamu vrací 404 (Google vyžaduje v urlset alespoň jednu značku <url>).
  */
 import { getUrlsWithVideos } from '../lib/sitemap';
 
@@ -7,6 +8,10 @@ export const prerender = true;
 
 export async function GET() {
   const urlEntries = await getUrlsWithVideos();
+
+  if (urlEntries.length === 0) {
+    return new Response(null, { status: 404 });
+  }
 
   const urlElements = urlEntries
     .map(
@@ -23,7 +28,7 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-${urlElements || '  <!-- Žádná videa – struktura připravena pro budoucí obsah -->\n'}
+${urlElements}
 </urlset>`;
 
   return new Response(xml, {
