@@ -3,14 +3,22 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  ogImageAlt?: string;
+  ogType?: 'website' | 'article';
 }
 
 import { toHttps } from '../lib/utils';
 
-const { title, description = "Memoriae Loci - Paměť míst. Dokumentujeme příběhy a historii míst, která mají význam.", image } = Astro.props;
+const { title, description = "Memoriae Loci - Paměť míst. Dokumentujeme příběhy a historii míst, která mají význam.", image, ogTitle, ogDescription, ogImageWidth, ogImageHeight, ogImageAlt, ogType = 'website' } = Astro.props;
 const siteURL = Astro.site || 'https://memoriaeloci.cz';
 const canonicalURL = new URL(Astro.url.pathname, siteURL);
 const imageUrl = image ? new URL(toHttps(image), siteURL).href : undefined;
+const ogTitleFinal = ogTitle ?? title;
+const ogDescriptionFinal = ogDescription ?? description;
 ---
 
 <!doctype html>
@@ -26,10 +34,16 @@ const imageUrl = image ? new URL(toHttps(image), siteURL).href : undefined;
     <link rel="canonical" href={canonicalURL} />
     
     {imageUrl && <meta property="og:image" content={imageUrl} />}
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    {imageUrl && ogImageWidth != null && <meta property="og:image:width" content={String(ogImageWidth)} />}
+    {imageUrl && ogImageHeight != null && <meta property="og:image:height" content={String(ogImageHeight)} />}
+    {imageUrl && ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+    {imageUrl && <meta property="og:image:secure_url" content={imageUrl} />}
+    <meta property="og:title" content={ogTitleFinal} />
+    <meta property="og:description" content={ogDescriptionFinal} />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL.href} />
+    
+    <slot name="head" />
     
     <!-- Cookie Banner Script -->
     <script type="text/javascript" charset="UTF-8" src="//cdn.cookie-script.com/s/77d2c938551ed8a9cd7a58eed08996cd.js"></script>

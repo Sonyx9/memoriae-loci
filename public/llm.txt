@@ -1,0 +1,85 @@
+# llm.txt — Memoriae Loci (Paměť místa)
+# Purpose: Help AI systems correctly understand, summarize, and cite this website.
+# Language: cs-CZ
+# Location focus: Liberec, CZ
+# Last updated: 2026-02-07
+
+[site]
+name = "Memoriae Loci – Paměť místa"
+url = "https://memoriaeloci.cz/"
+primary_language = "cs-CZ"
+
+[organization]
+legal_name = "Memoriae Loci, z.ú."
+alternate_name = "Memoriae Loci – Paměť místa"
+type = "Nezisková organizace (zapsaný ústav)"
+id_number = "IČO 21168415"
+founded = "2024-01-25"
+founder = "Mgr. Lukáš Koula"
+area_served = "Liberec, CZ"
+mission = "Podpora a rozšiřování znalostí o historii a kultuře místa, které zahrnují nejen historické a fyzické aspekty, ale také emocionální, sociální a symbolické rozměry paměti."
+
+[contact]
+email = "info@memoriaeloci.cz"
+phone = "+420775347915"
+contact_page = "https://memoriaeloci.cz/kontakt"
+
+[social]
+facebook = "https://www.facebook.com/locimemoriae"
+instagram = "https://www.instagram.com/memoriaeloci/"
+youtube = "https://www.youtube.com/@LociMemoriae"
+
+[what_this_site_is_about]
+topics = [
+  "paměť místa (genius loci)",
+  "historie Liberce",
+  "kulturní dědictví",
+  "zapomenutá a ohrožená místa",
+  "komunitní a kolektivní paměť",
+  "připomínání historie ve veřejném prostoru",
+  "příběhy míst a jejich obyvatel"
+]
+
+[content_types]
+types = [
+  "magazínové články a eseje",
+  "dlouhodobé paměťové projekty",
+  "dokumentace kulturních a komunitních aktivit",
+  "edukační a popularizační obsah",
+  "připomínkové a paměťové iniciativy"
+]
+
+[key_pages]
+homepage = "https://memoriaeloci.cz/"
+vision = "https://memoriaeloci.cz/nase-vize"
+magazine = "https://memoriaeloci.cz/magazin"
+projects_overview = "https://memoriaeloci.cz/projekty"
+
+project_stolpersteine = "https://stolpersteine.memoriaeloci.cz/"
+project_ve_jmenu_lilie = "https://memoriaeloci.cz/ve-jmenu-lilie"
+project_liberecke_pribehy = "https://memoriaeloci.cz/projekty/liberecke-pribehy"
+project_zapomenuta_mista = "https://memoriaeloci.cz/projekty/zapomenuta-mista-liberec"
+
+support = "https://memoriaeloci.cz/podporte-nas"
+contact = "https://memoriaeloci.cz/kontakt"
+
+[citation_guidelines]
+preferred_citation_name = "Memoriae Loci – Paměť místa"
+preferred_citation_url = "https://memoriaeloci.cz/"
+how_to_cite = "Uveďte název konkrétní stránky nebo projektu, název organizace Memoriae Loci a přímý URL odkaz."
+
+[ai_use_guidelines]
+allowed = [
+  "stručné shrnutí obsahu jednotlivých stránek",
+  "citace krátkých úryvků (1–2 věty) s uvedením zdroje",
+  "faktické přehledy a kontextualizace historie Liberce založené na obsahu webu"
+]
+not_allowed = [
+  "vytváření spekulativních nebo neověřených tvrzení bez opory v textech webu",
+  "připisování autorství Memoriae Loci k informacím, které nejsou na webu publikovány",
+  "záměna geografického působení (hlavní oblast je Liberec)"
+]
+note = "Pokud si AI systém není jistý detailem, doporučuje se citovat konkrétní stránku nebo uvést, že informace není na webu explicitně uvedena."
+
+[one_paragraph_summary_for_llms]
+Memoriae Loci – Paměť místa je nezisková organizace (Memoriae Loci, z.ú., IČO 21168415) působící v Liberci. Zaměřuje se na ochranu kulturního dědictví a na zkoumání a popularizaci paměti místa – historie a kultury míst včetně jejich emocionálních, sociálních a symbolických významů. Web memoriaeloci.cz publikuje magazínové články, dokumentaci paměťových projektů (např. Stolpersteine, Liberecké příběhy, Zapomenutá místa Liberce) a výstupy z komunitních aktivit. Při využití obsahu preferujte citace s přímým odkazem na konkrétní stránku webu.

@@ -2,12 +2,89 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://memoriaeloci.cz';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/podporte-nas/#breadcrumbs`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Memoriae Loci', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Podpořte nás', item: `${siteUrl}/podporte-nas/` },
+      ],
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/podporte-nas/#webpage`,
+      url: `${siteUrl}/podporte-nas/`,
+      name: 'Podpořte nás – Memoriae Loci',
+      description: 'Možnosti podpory Memoriae Loci: partnerství, dobrovolnictví, redakční pomoc a finanční dar včetně QR platby.',
+      inLanguage: 'cs-CZ',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      about: { '@id': `${siteUrl}/#organization` },
+      breadcrumb: { '@id': `${siteUrl}/podporte-nas/#breadcrumbs` },
+      potentialAction: {
+        '@type': 'DonateAction',
+        name: 'Podpořit Memoriae Loci',
+        target: `${siteUrl}/podporte-nas/`,
+        recipient: { '@id': `${siteUrl}/#organization` },
+      },
+    },
+    {
+      '@type': 'DonateAction',
+      '@id': `${siteUrl}/podporte-nas/#donate`,
+      name: 'Finanční dar Memoriae Loci',
+      target: `${siteUrl}/podporte-nas/`,
+      recipient: { '@id': `${siteUrl}/#organization` },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${siteUrl}/podporte-nas/#faq`,
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Jak mohu přispět nejrychleji?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Přes QR platbu nebo bankovním převodem na uvedený účet.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Na co dar použijete?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Na dokumentaci a rozvoj projektů, aby výstupy zůstaly veřejně dostupné.',
+          },
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <BaseLayout 
-  title="Podpořte nás - Memoriae Loci" 
-  description="Podpořte naši práci na dokumentaci příběhů míst"
+  title="Podpořte nás: dar, partnerství, dobrovolnictví | Memoriae Loci - Paměť místa"
+  description="Podpořte Memoriae Loci v Liberci: dar, partnerství i dobrovolnictví. Pomáháte zachovat příběhy míst a lidí. Přispějte snadno i přes QR platbu."
+  image={`${siteUrl}/images/og/og-podporte-nas-1200x630.jpg`}
+  ogTitle="Podpořte Memoriae Loci – dar, partnerství, dobrovolnictví"
+  ogDescription="Vaše podpora pomáhá dokumentovat a zachovávat příběhy míst v Liberci. Přispějte darem, staňte se partnerem nebo dobrovolníkem."
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  ogImageAlt="Podpořte Memoriae Loci – zachování paměti místa v Liberci"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <meta property="og:site_name" content="Memoriae Loci – Paměť místa" />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Podpořte nás | Memoriae Loci" />
+    <meta name="twitter:description" content="Dar, partnerství, dobrovolnictví: pomáháte zachovat paměť místa v Liberci." />
+    <meta name="twitter:image" content="https://memoriaeloci.cz/images/og/og-podporte-nas-1200x630.jpg" />
+  </Fragment>
   <Navigation />
   
   <main class="pt-16 min-h-screen">
@@ -166,6 +243,7 @@ import Footer from '../components/Footer.astro';
                 alt="QR platba"
                 class="w-48 h-48 bg-white p-2 rounded-lg"
               />
+              <p class="text-slate-400 text-xs text-center mt-3 max-w-[12rem]">Na vyžádání vystavíme potvrzení o daru</p>
             </div>
           </div>
         </div>
@@ -238,6 +316,23 @@ import Footer from '../components/Footer.astro';
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Mini-FAQ -->
+    <section class="bg-slate-950 py-16 border-t border-slate-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-50 mb-8">Časté dotazy</h2>
+        <dl class="space-y-6 max-w-2xl">
+          <div>
+            <dt class="text-slate-50 font-semibold mb-2">Jak mohu přispět nejrychleji?</dt>
+            <dd class="text-slate-400">Přes QR platbu nebo bankovním převodem na uvedený účet.</dd>
+          </div>
+          <div>
+            <dt class="text-slate-50 font-semibold mb-2">Na co dar použijete?</dt>
+            <dd class="text-slate-400">Na dokumentaci a rozvoj projektů, aby výstupy zůstaly veřejně dostupné.</dd>
+          </div>
+        </dl>
       </div>
     </section>
 

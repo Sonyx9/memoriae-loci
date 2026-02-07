@@ -2,12 +2,60 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://memoriaeloci.cz';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/nase-vize/#breadcrumbs`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Memoriae Loci', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Naše vize', item: `${siteUrl}/nase-vize/` },
+      ],
+    },
+    {
+      '@type': 'AboutPage',
+      '@id': `${siteUrl}/nase-vize/#aboutpage`,
+      url: `${siteUrl}/nase-vize/`,
+      name: 'Naše vize – Memoriae Loci',
+      description: 'Usilujeme o zachování historické paměti a kultury prostřednictvím vzdělávacích programů a projektů. Naše mise spočívá v připomínání historie a podpoře vzájemného porozumění nejen pro budoucí generace.',
+      inLanguage: 'cs-CZ',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      about: { '@id': `${siteUrl}/#organization` },
+      breadcrumb: { '@id': `${siteUrl}/nase-vize/#breadcrumbs` },
+      mainEntity: { '@id': `${siteUrl}/#organization` },
+      hasPart: [
+        { '@type': 'Person', name: 'Bc. Radek Moťka', jobTitle: 'Ředitel', affiliation: { '@id': `${siteUrl}/#organization` } },
+        { '@type': 'Person', name: 'Mgr. Lukáš Koula', jobTitle: 'Předseda správní rady', affiliation: { '@id': `${siteUrl}/#organization` } },
+        { '@type': 'Person', name: 'Mgr. Markéta Filla, Ph.D.', jobTitle: 'Členka rady', affiliation: { '@id': `${siteUrl}/#organization` } },
+        { '@type': 'Person', name: 'Ing. Michaela Moťka Kaňovská', jobTitle: 'Členka rady', affiliation: { '@id': `${siteUrl}/#organization` } },
+      ],
+    },
+  ],
+};
 ---
 
 <BaseLayout 
-  title="Naše vize - Memoriae Loci" 
-  description="Naše vize a tým Memoriae Loci"
+  title="Naše vize a tým v Liberci | Memoriae Loci - Paměť místa"
+  description="Poznejte naši vizi: chráníme paměť místa v Liberci, připomínáme historii a posilujeme porozumění. Seznamte se s týmem Memoriae Loci."
+  image={`${siteUrl}/images/logo-footer.png`}
+  ogTitle="Naše vize a tým v Liberci – Memoriae Loci"
+  ogDescription="Usilujeme o zachování historické paměti a kultury prostřednictvím vzdělávacích programů a projektů. Poznejte náš tým."
+  ogImageAlt="Memoriae Loci – Paměť místa v Liberci"
+  ogType="article"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <meta property="og:site_name" content="Memoriae Loci – Paměť místa" />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Naše vize a tým v Liberci | Memoriae Loci" />
+    <meta name="twitter:description" content="Paměť místa, historie Liberce a vzdělávací projekty. Seznamte se s Memoriae Loci." />
+    <meta name="twitter:image" content="https://memoriaeloci.cz/images/logo-footer.png" />
+  </Fragment>
   <Navigation />
   
   <main class="pt-16 min-h-screen">
@@ -246,6 +294,7 @@ import Footer from '../components/Footer.astro';
                 alt="QR platba"
                 class="w-48 h-48 bg-white p-2 rounded-lg"
               />
+              <p class="text-slate-400 text-xs text-center mt-3 max-w-[12rem]">Na vyžádání vystavíme potvrzení o daru</p>
             </div>
           </div>
         </div>

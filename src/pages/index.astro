@@ -38,9 +38,77 @@ for (let i = -2; i <= 2; i++) {
 ---
 
 <BaseLayout 
-  title="Paměť místa | Memoriae Loci z.ú." 
-  description="Nezisková organizace Memoriae Loci se věnuje dokumentaci historie, paměti místa a kulturního dědictví v Liberci."
+  title="Paměť místa Liberec | Oživujeme zapomenuté příběhy – Memoriae Loci"
+  description="Objevte paměť místa v Liberci. Chráníme kulturní dědictví, vracíme příběhy zapomenutým místům a spojujeme komunitu. Poznejte Memoriae Loci."
+  image="https://memoriaeloci.cz/images/og/og-homepage-1200x630.jpg"
+  ogTitle="Memoriae Loci – Paměť místa v Liberci"
+  ogDescription="Nezisková organizace v Liberci: oživujeme paměť místa, chráníme kulturní dědictví a vracíme příběhy zapomenutým místům."
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  ogImageAlt="Memoriae Loci – Paměť místa v Liberci (kulturní dědictví, komunitní paměť)"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "NonprofitOrganization",
+          "@id": "https://memoriaeloci.cz/#organization",
+          "name": "Memoriae Loci, z.ú.",
+          "alternateName": "Memoriae Loci – Paměť místa",
+          "legalName": "Memoriae Loci, z.ú.",
+          "url": "https://memoriaeloci.cz/",
+          "logo": "https://memoriaeloci.cz/images/logo-footer.png",
+          "foundingDate": "2024-01-25",
+          "founder": { "@type": "Person", "name": "Mgr. Lukáš Koula" },
+          "identifier": { "@type": "PropertyValue", "propertyID": "IČO", "value": "21168415" },
+          "description": "Podpora a rozšiřování znalostí o historii a kultuře místa v Liberci, zahrnující emocionální, sociální a symbolické rozměry paměti.",
+          "areaServed": {
+            "@type": "City",
+            "name": "Liberec",
+            "address": { "@type": "PostalAddress", "addressLocality": "Liberec", "addressCountry": "CZ" }
+          },
+          "email": "info@memoriaeloci.cz",
+          "telephone": "+420775347915",
+          "sameAs": [
+            "https://www.facebook.com/locimemoriae",
+            "https://www.instagram.com/memoriaeloci/",
+            "https://www.youtube.com/@LociMemoriae"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://memoriaeloci.cz/#website",
+          "url": "https://memoriaeloci.cz/",
+          "name": "Memoriae Loci – Paměť místa",
+          "publisher": { "@id": "https://memoriaeloci.cz/#organization" },
+          "inLanguage": "cs-CZ",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://memoriaeloci.cz/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://memoriaeloci.cz/#webpage",
+          "url": "https://memoriaeloci.cz/",
+          "name": "Paměť místa v Liberci – Memoriae Loci",
+          "isPartOf": { "@id": "https://memoriaeloci.cz/#website" },
+          "about": { "@id": "https://memoriaeloci.cz/#organization" },
+          "inLanguage": "cs-CZ"
+        }
+      ]
+    })} />
+    <meta property="og:site_name" content="Memoriae Loci – Paměť místa" />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta property="og:determiner" content="the" />
+    <meta property="og:updated_time" content="2026-02-07T00:00:00+01:00" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Paměť místa Liberec – Memoriae Loci" />
+    <meta name="twitter:description" content="Kulturní paměť Liberce. Příběhy míst, která bychom neměli zapomenout." />
+    <meta name="twitter:image" content="https://memoriaeloci.cz/images/og/og-homepage-1200x630.jpg" />
+  </Fragment>
   <Navigation />
   
   <!-- Hero Section -->
@@ -258,12 +326,7 @@ for (let i = -2; i <= 2; i++) {
   
   <!-- Cinematic Section with Articles -->
   <section class="group relative overflow-hidden" style="padding-top: 8rem; padding-bottom: 1rem; margin-top: -48px;">
-    <div class="absolute inset-0 z-0">
-      <img 
-        src="/images/cinematic.jpg" 
-        alt="Cinematic background" 
-        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-500"
-      />
+    <div class="absolute inset-0 z-0 bg-slate-950">
       <div class="absolute inset-0 bg-gradient-to-b from-slate-950/95 via-slate-950/90 to-slate-950"></div>
       <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent"></div>
     </div>

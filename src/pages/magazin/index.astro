@@ -6,7 +6,60 @@ import { getPublishedArticles } from '../../lib/articles';
 import { projects } from '../../lib/projects';
 import { formatDate } from '../../lib/utils';
 
+const siteUrl = 'https://memoriaeloci.cz';
 const allArticles = await getPublishedArticles();
+
+function toISODate(dateStr: string): string {
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? dateStr : d.toISOString().slice(0, 10);
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/magazin/#breadcrumbs`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Memoriae Loci', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Magazín', item: `${siteUrl}/magazin/` },
+      ],
+    },
+    {
+      '@type': 'CollectionPage',
+      '@id': `${siteUrl}/magazin/#collectionpage`,
+      url: `${siteUrl}/magazin/`,
+      name: 'Magazín – Memoriae Loci',
+      description: 'Objevte příběhy míst, která dokumentujeme. Každé místo má svou historii, která stojí za to vyprávět.',
+      inLanguage: 'cs-CZ',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      about: { '@id': `${siteUrl}/#organization` },
+      breadcrumb: { '@id': `${siteUrl}/magazin/#breadcrumbs` },
+      mainEntity: { '@id': `${siteUrl}/magazin/#itemlist` },
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${siteUrl}/magazin/#itemlist`,
+      name: 'Nejnovější články v Magazínu',
+      itemListOrder: 'https://schema.org/ItemListOrderDescending',
+      numberOfItems: allArticles.length,
+      itemListElement: allArticles.map((article, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'BlogPosting',
+          '@id': `${siteUrl}/magazin/${article.slug}/#blogposting`,
+          headline: article.title,
+          url: `${siteUrl}/magazin/${article.slug}/`,
+          datePublished: toISODate(article.publishedAt),
+          author: { '@type': 'Organization', '@id': `${siteUrl}/#organization` },
+          publisher: { '@type': 'Organization', '@id': `${siteUrl}/#organization` },
+          mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/magazin/${article.slug}/` },
+        },
+      })),
+    },
+  ],
+};
 const allProjects = projects.map(p => p.slug);
 
 // Normalize and deduplicate tags (case-insensitive)
@@ -92,9 +145,20 @@ if (searchQuery) {
 ---
 
 <BaseLayout 
-  title="Magazín - Memoriae Loci" 
-  description="Objevte příběhy míst, která dokumentujeme"
+  title="Magazín: historie Liberce a paměť místa | Memoriae Loci"
+  description="Články o paměti místa a historii Liberce: zapomenutá místa, Kameny zmizelých i Ve jménu lilie. Čtěte příběhy, sdílejte a podpořte Memoriae Loci."
+  image={`${siteUrl}/images/og/og-magazin-1200x630.jpg`}
+  ogTitle="Magazín: historie Liberce a paměť místa – Memoriae Loci"
+  ogDescription="Články a příběhy z Liberce: paměť místa, zapomenuté lokality i osudy lidí. Prozkoumejte magazín Memoriae Loci."
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  ogImageAlt="Magazín Memoriae Loci: historie Liberce a paměť místa"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <meta property="og:site_name" content="Memoriae Loci – Paměť místa" />
+    <meta property="og:locale" content="cs_CZ" />
+  </Fragment>
   <Navigation />
   
   <main class="pt-16 min-h-screen">
@@ -303,6 +367,7 @@ if (searchQuery) {
                 alt="QR platba"
                 class="w-48 h-48 bg-white p-2 rounded-lg"
               />
+              <p class="text-slate-400 text-xs text-center mt-3 max-w-[12rem]">Na vyžádání vystavíme potvrzení o daru</p>
             </div>
           </div>
         </div>
