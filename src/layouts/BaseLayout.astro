@@ -20,7 +20,6 @@ const imageUrl = image ? new URL(toHttps(image), siteURL).href : undefined;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="robots" content="noindex" />
     
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -31,6 +30,9 @@ const imageUrl = image ? new URL(toHttps(image), siteURL).href : undefined;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL.href} />
+    
+    <!-- Cookie Banner Script -->
+    <script type="text/javascript" charset="UTF-8" src="//cdn.cookie-script.com/s/77d2c938551ed8a9cd7a58eed08996cd.js"></script>
   </head>
   <body class="bg-slate-950 text-slate-50 antialiased">
     <slot />
