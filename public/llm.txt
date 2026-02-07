@@ -2,7 +2,7 @@
 # Purpose: Help AI systems correctly understand, summarize, and cite this website.
 # Language: cs-CZ
 # Location focus: Liberec, CZ
-# Last updated: 2026-02-07
+# Last updated: 2026-02-08
 
 [site]
 name = "Memoriae Loci – Paměť místa"
@@ -52,8 +52,11 @@ types = [
 [key_pages]
 homepage = "https://memoriaeloci.cz/"
 vision = "https://memoriaeloci.cz/nase-vize"
+about = "https://memoriaeloci.cz/o-nas"
 magazine = "https://memoriaeloci.cz/magazin"
 projects_overview = "https://memoriaeloci.cz/projekty"
+past_events = "https://memoriaeloci.cz/probehle-akce"
+privacy_policy = "https://memoriaeloci.cz/zasady-ochrany-osobnich-udaju"
 
 project_stolpersteine = "https://stolpersteine.memoriaeloci.cz/"
 project_ve_jmenu_lilie = "https://memoriaeloci.cz/ve-jmenu-lilie"
@@ -62,6 +65,14 @@ project_zapomenuta_mista = "https://memoriaeloci.cz/projekty/zapomenuta-mista-li
 
 support = "https://memoriaeloci.cz/podporte-nas"
 contact = "https://memoriaeloci.cz/kontakt"
+
+[discovery]
+sitemap_index = "https://memoriaeloci.cz/sitemap-index.xml"
+sitemap_pages = "https://memoriaeloci.cz/sitemap.xml"
+sitemap_images = "https://memoriaeloci.cz/sitemap-images.xml"
+sitemap_videos = "https://memoriaeloci.cz/sitemap-videos.xml"
+robots = "https://memoriaeloci.cz/robots.txt"
+llm_txt = "https://memoriaeloci.cz/llm.txt"
 
 [citation_guidelines]
 preferred_citation_name = "Memoriae Loci – Paměť místa"

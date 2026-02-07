@@ -1,4 +1,8 @@
+# Memoriae Loci – Paměť místa
+# https://memoriaeloci.cz
+
 User-agent: *
 Allow: /
+Disallow: /admin/
 
 Sitemap: https://memoriaeloci.cz/sitemap-index.xml
