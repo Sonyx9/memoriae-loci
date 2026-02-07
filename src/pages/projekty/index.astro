@@ -3,12 +3,86 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 import { projects } from '../../lib/projects';
+
+const siteUrl = 'https://memoriaeloci.cz';
+const projectsUrl = `${siteUrl}/projekty/`;
+
+function projectItemUrl(project: (typeof projects)[0]): string {
+  if (project.externalUrl?.startsWith('http')) return project.externalUrl;
+  if (project.externalUrl) return `${siteUrl}${project.externalUrl}`;
+  return `${siteUrl}/projekty/${project.slug}/`;
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${projectsUrl}#breadcrumbs`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Memoriae Loci', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Projekty', item: projectsUrl },
+      ],
+    },
+    {
+      '@type': 'CollectionPage',
+      '@id': `${projectsUrl}#collectionpage`,
+      url: projectsUrl,
+      name: 'Projekty – Memoriae Loci',
+      description: 'Přehled projektů Memoriae Loci v Liberci zaměřených na paměť místa, kulturní dědictví a příběhy lidí a lokalit.',
+      inLanguage: 'cs-CZ',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      about: { '@id': `${siteUrl}/#organization` },
+      breadcrumb: { '@id': `${projectsUrl}#breadcrumbs` },
+      mainEntity: { '@id': `${projectsUrl}#itemlist` },
+      potentialAction: [
+        { '@type': 'ReadAction', target: projectsUrl },
+        {
+          '@type': 'DonateAction',
+          name: 'Podpořit Memoriae Loci',
+          target: `${siteUrl}/podporte-nas/`,
+          recipient: { '@id': `${siteUrl}/#organization` },
+        },
+      ],
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${projectsUrl}#itemlist`,
+      name: 'Přehled projektů Memoriae Loci',
+      itemListOrder: 'https://schema.org/ItemListOrderUnordered',
+      itemListElement: projects.map((project, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'CreativeWork',
+          name: project.name,
+          url: projectItemUrl(project),
+        },
+      })),
+    },
+  ],
+};
 ---
 
 <BaseLayout 
-  title="Projekty - Memoriae Loci" 
-  description="Přehled našich projektů zaměřených na dokumentaci míst a jejich příběhů"
+  title="Projekty v Liberci: paměť místa a příběhy | Memoriae Loci"
+  description="Prohlédněte si projekty Memoriae Loci v Liberci: paměť místa, příběhy lidí, zapomenutá místa i připomínání historie ve veřejném prostoru."
+  image={`${siteUrl}/images/og/og-projekty-1200x630.jpg`}
+  ogTitle="Projekty – Memoriae Loci (Liberec)"
+  ogDescription="Přehled projektů Memoriae Loci: paměť místa, historie Liberce, zapomenutá místa a příběhy lidí."
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  ogImageAlt="Projekty Memoriae Loci – paměť místa v Liberci"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <meta property="og:site_name" content="Memoriae Loci – Paměť místa" />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Projekty | Memoriae Loci" />
+    <meta name="twitter:description" content="Přehled projektů v Liberci: paměť místa, příběhy lidí a dokumentace proměn města." />
+    <meta name="twitter:image" content="https://memoriaeloci.cz/images/og/og-projekty-1200x630.jpg" />
+  </Fragment>
   <Navigation />
   
   <main class="pt-16 min-h-screen">

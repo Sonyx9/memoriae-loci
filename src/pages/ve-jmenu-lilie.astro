@@ -7,12 +7,103 @@ import { formatDate } from '../lib/utils';
 
 const projectSlug = 'pribehy-mest';
 const projectArticles = await getArticlesByProject(projectSlug);
+
+const siteUrl = 'https://memoriaeloci.cz';
+const pageUrl = `${siteUrl}/ve-jmenu-lilie/`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#breadcrumbs`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Memoriae Loci', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Ve jménu lilie', item: pageUrl },
+      ],
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: 'Ve jménu lilie – Memoriae Loci',
+      description: 'Projekt mapující historii skautského hnutí v Liberci a Libereckém kraji: klíčové momenty, perzekuce i obnova po roce 1989.',
+      inLanguage: 'cs-CZ',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      about: { '@id': `${siteUrl}/#organization` },
+      breadcrumb: { '@id': `${pageUrl}#breadcrumbs` },
+      mainEntity: { '@id': `${pageUrl}#project` },
+      potentialAction: [
+        { '@type': 'ReadAction', target: pageUrl },
+        {
+          '@type': 'DonateAction',
+          name: 'Podpořit Memoriae Loci',
+          target: `${siteUrl}/podporte-nas/`,
+          recipient: { '@id': `${siteUrl}/#organization` },
+        },
+      ],
+    },
+    {
+      '@type': 'CreativeWork',
+      '@id': `${pageUrl}#project`,
+      additionalType: 'https://schema.org/Project',
+      name: 'Ve jménu lilie',
+      alternateName: 'Příběh libereckých skautů',
+      description: 'Projekt Memoriae Loci mapující historii skautského hnutí v Liberci a Libereckém kraji – od počátků přes období perzekucí až po obnovu po roce 1989.',
+      url: pageUrl,
+      inLanguage: 'cs-CZ',
+      creator: { '@id': `${siteUrl}/#organization` },
+      publisher: { '@id': `${siteUrl}/#organization` },
+      spatialCoverage: [
+        {
+          '@type': 'City',
+          name: 'Liberec',
+          address: { '@type': 'PostalAddress', addressLocality: 'Liberec', addressCountry: 'CZ' },
+        },
+        {
+          '@type': 'AdministrativeArea',
+          name: 'Liberecký kraj',
+          address: { '@type': 'PostalAddress', addressCountry: 'CZ' },
+        },
+      ],
+      about: [
+        'skauting',
+        'Junák – český skaut',
+        'historie Liberce',
+        'komunitní paměť',
+        'perzekuce za komunismu',
+        'obnova po roce 1989',
+      ],
+      funder: [
+        { '@type': 'Organization', name: 'Krajská rada Junáka – českého skauta' },
+        { '@type': 'GovernmentOrganization', name: 'Liberecký kraj' },
+      ],
+      mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+    },
+  ],
+};
 ---
 
 <BaseLayout 
-  title="Ve jménu Lilie - Příběh libereckých skautů - Memoriae Loci"
-  description="Odhalte, jak se skauting v Liberci vyvíjel a jaké klíčové momenty ho formovaly. Projekt realizovaný za podpory Krajské rady Junáka."
+  title="Ve jménu lilie: skauting v Liberci | Memoriae Loci - Paměť místa"
+  description="Projekt mapuje historii skautského hnutí v Liberci a kraji: zlomové roky, perzekuce i obnova po 1989. Čtěte příběhy Memoriae Loci."
+  image={`${siteUrl}/images/og/og-ve-jmenu-lilie-1200x630.jpg`}
+  ogTitle="Ve jménu lilie – příběh libereckých skautů"
+  ogDescription="Historie skautského hnutí v Liberci a Libereckém kraji: klíčové momenty, perzekuce i obnova po roce 1989."
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  ogImageAlt="Ve jménu lilie – historie skautingu v Liberci (Memoriae Loci)"
+  ogType="article"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <meta property="og:site_name" content="Memoriae Loci – Paměť místa" />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ve jménu lilie | Memoriae Loci" />
+    <meta name="twitter:description" content="Příběh libereckých skautů: vývoj skautingu, zlomové roky a obnova po 1989." />
+    <meta name="twitter:image" content="https://memoriaeloci.cz/images/og/og-ve-jmenu-lilie-1200x630.jpg" />
+  </Fragment>
   <Navigation />
   
   <!-- Hero Section -->

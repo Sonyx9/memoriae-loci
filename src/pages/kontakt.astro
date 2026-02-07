@@ -2,60 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
-
-const siteUrl = 'https://memoriaeloci.cz';
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${siteUrl}/kontakt/#breadcrumbs`,
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Memoriae Loci', item: `${siteUrl}/` },
-        { '@type': 'ListItem', position: 2, name: 'Kontakt', item: `${siteUrl}/kontakt` },
-      ],
-    },
-    {
-      '@type': 'ContactPage',
-      '@id': `${siteUrl}/kontakt/#contactpage`,
-      url: `${siteUrl}/kontakt`,
-      name: 'Kontakt – Memoriae Loci',
-      description: 'Kontaktní stránka neziskové organizace Memoriae Loci působící v Liberci. Dotazy k projektům, spolupráci a podpoře paměti místa.',
-      inLanguage: 'cs-CZ',
-      isPartOf: { '@id': `${siteUrl}/#website` },
-      about: { '@id': `${siteUrl}/#organization` },
-      breadcrumb: { '@id': `${siteUrl}/kontakt/#breadcrumbs` },
-      mainEntity: {
-        '@type': 'Organization',
-        '@id': `${siteUrl}/#organization`,
-        name: 'Memoriae Loci, z.ú.',
-        email: 'info@memoriaeloci.cz',
-        telephone: '+420775347915',
-        areaServed: { '@type': 'City', name: 'Liberec' },
-      },
-    },
-  ],
-};
 ---
 
 <BaseLayout 
-  title="Kontakt | Memoriae Loci – Paměť místa v Liberci"
-  description="Kontaktujte Memoriae Loci v Liberci. Napište nám k projektům, spolupráci, médiím nebo podpoře paměti místa a kulturního dědictví."
-  image={`${siteUrl}/images/logo-footer.png`}
-  ogTitle="Kontakt – Memoriae Loci (Liberec)"
-  ogDescription="Kontaktní údaje neziskové organizace Memoriae Loci. Ozvěte se nám k projektům, spolupráci nebo podpoře paměti místa."
-  ogImageAlt="Kontakt Memoriae Loci – Paměť místa, Liberec"
+  title="Kontakt - Memoriae Loci" 
+  description="Kontaktujte neziskovou organizaci Memoriae Loci"
 >
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    <meta property="og:site_name" content="Memoriae Loci – Paměť místa" />
-    <meta property="og:locale" content="cs_CZ" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Kontakt | Memoriae Loci" />
-    <meta name="twitter:description" content="Kontaktní údaje Memoriae Loci – neziskové organizace pro paměť místa v Liberci." />
-    <meta name="twitter:image" content="https://memoriaeloci.cz/images/logo-footer.png" />
-  </Fragment>
   <Navigation />
   
   <main class="pt-16 min-h-screen">

@@ -16,12 +16,155 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const projectArticles = await getArticlesByProject(project.slug);
+
+const siteUrl = 'https://memoriaeloci.cz';
+const projectUrl = `${siteUrl}/projekty/${project.slug}/`;
+
+const isLibereckePribehy = project.slug === 'liberecke-pribehy';
+const isZapomenutaMista = project.slug === 'zapomenuta-mista-liberec';
+
+const pageTitle = isLibereckePribehy
+  ? 'Liberecké příběhy: paměť lidí a míst | Memoriae Loci'
+  : isZapomenutaMista
+    ? 'Zapomenutá místa Liberce: příběhy a paměť | Memoriae Loci'
+    : `${project.name} - Memoriae Loci`;
+const pageDescription = isLibereckePribehy
+  ? 'Liberecké příběhy zachycují paměť lidí a míst v Liberci. Projekt Memoriae Loci mapuje osobní vzpomínky, historii i proměny města.'
+  : isZapomenutaMista
+    ? 'Projekt Zapomenutá místa Liberce mapuje místa, která mizí z paměti města. Příběhy, kontext a dokumentace – poznejte Memoriae Loci.'
+    : project.description;
+
+const jsonLdLibereckePribehy = isLibereckePribehy
+  ? {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${projectUrl}#breadcrumbs`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Memoriae Loci', item: `${siteUrl}/` },
+            { '@type': 'ListItem', position: 2, name: 'Projekty', item: `${siteUrl}/projekty/` },
+            { '@type': 'ListItem', position: 3, name: 'Liberecké příběhy', item: projectUrl },
+          ],
+        },
+        {
+          '@type': 'CreativeWork',
+          '@id': `${projectUrl}#project`,
+          name: 'Liberecké příběhy',
+          description: 'Projekt Memoriae Loci mapující osobní příběhy, paměť lidí a proměny míst v Liberci.',
+          url: projectUrl,
+          inLanguage: 'cs-CZ',
+          about: ['paměť místa', 'historie Liberce', 'osobní vzpomínky', 'kulturní paměť'],
+          creator: { '@id': `${siteUrl}/#organization` },
+          publisher: { '@id': `${siteUrl}/#organization` },
+          isPartOf: { '@id': `${siteUrl}/#website` },
+          mainEntityOfPage: { '@type': 'WebPage', '@id': projectUrl },
+          breadcrumb: { '@id': `${projectUrl}#breadcrumbs` },
+        },
+      ],
+    }
+  : null;
+
+const jsonLdZapomenutaMista = isZapomenutaMista
+  ? {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${projectUrl}#breadcrumbs`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Memoriae Loci', item: `${siteUrl}/` },
+            { '@type': 'ListItem', position: 2, name: 'Projekty', item: `${siteUrl}/projekty/` },
+            { '@type': 'ListItem', position: 3, name: 'Zapomenutá místa Liberce', item: projectUrl },
+          ],
+        },
+        {
+          '@type': 'WebPage',
+          '@id': `${projectUrl}#webpage`,
+          url: projectUrl,
+          name: 'Zapomenutá místa Liberce – Memoriae Loci',
+          inLanguage: 'cs-CZ',
+          isPartOf: { '@id': `${siteUrl}/#website` },
+          about: { '@id': `${siteUrl}/#organization` },
+          breadcrumb: { '@id': `${projectUrl}#breadcrumbs` },
+          mainEntity: { '@id': `${projectUrl}#project` },
+          potentialAction: [
+            { '@type': 'ReadAction', target: projectUrl },
+            {
+              '@type': 'DonateAction',
+              name: 'Podpořit Memoriae Loci',
+              target: `${siteUrl}/podporte-nas/`,
+              recipient: { '@id': `${siteUrl}/#organization` },
+            },
+          ],
+        },
+        {
+          '@type': 'CreativeWork',
+          '@id': `${projectUrl}#project`,
+          additionalType: 'https://schema.org/Project',
+          name: 'Zapomenutá místa Liberce',
+          description: 'Projekt Memoriae Loci mapující zapomenutá a proměňující se místa v Liberci – jejich příběhy, paměť a kontext.',
+          url: projectUrl,
+          inLanguage: 'cs-CZ',
+          creator: { '@id': `${siteUrl}/#organization` },
+          publisher: { '@id': `${siteUrl}/#organization` },
+          spatialCoverage: {
+            '@type': 'City',
+            name: 'Liberec',
+            address: { '@type': 'PostalAddress', addressLocality: 'Liberec', addressCountry: 'CZ' },
+          },
+          about: ['paměť místa', 'historie Liberce', 'kulturní dědictví', 'zapomenutá místa', 'komunitní paměť'],
+          mainEntityOfPage: { '@type': 'WebPage', '@id': projectUrl },
+        },
+      ],
+    }
+  : null;
 ---
 
 <BaseLayout 
-  title={`${project.name} - Memoriae Loci`}
-  description={project.description}
+  title={pageTitle}
+  description={pageDescription}
+  {...(isLibereckePribehy && {
+    image: `${siteUrl}/images/og/og-liberecke-pribehy-1200x630.jpg`,
+    ogTitle: 'Liberecké příběhy – paměť lidí a míst',
+    ogDescription: 'Projekt Memoriae Loci mapující osobní příběhy, vzpomínky a paměť míst v Liberci.',
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    ogImageAlt: 'Liberecké příběhy – paměť lidí a míst v Liberci',
+    ogType: 'article',
+  })}
+  {...(isZapomenutaMista && {
+    image: `${siteUrl}/images/og/og-zapomenuta-mista-1200x630.jpg`,
+    ogTitle: 'Zapomenutá místa Liberce – Memoriae Loci',
+    ogDescription: 'Projekt mapující zapomenutá a proměňující se místa v Liberci: příběhy, paměť, kontext a dokumentace.',
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    ogImageAlt: 'Zapomenutá místa Liberce – příběhy a paměť města (Memoriae Loci)',
+    ogType: 'article',
+  })}
 >
+  {jsonLdLibereckePribehy && (
+    <Fragment slot="head">
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLdLibereckePribehy)} />
+      <meta property="og:site_name" content="Memoriae Loci – Paměť místa" />
+      <meta property="og:locale" content="cs_CZ" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Liberecké příběhy | Memoriae Loci" />
+      <meta name="twitter:description" content="Paměť lidí a míst v Liberci. Projekt mapující osobní vzpomínky a historii města." />
+      <meta name="twitter:image" content="https://memoriaeloci.cz/images/og/og-liberecke-pribehy-1200x630.jpg" />
+    </Fragment>
+  )}
+  {jsonLdZapomenutaMista && (
+    <Fragment slot="head">
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLdZapomenutaMista)} />
+      <meta property="og:site_name" content="Memoriae Loci – Paměť místa" />
+      <meta property="og:locale" content="cs_CZ" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Zapomenutá místa Liberce | Memoriae Loci" />
+      <meta name="twitter:description" content="Mapujeme místa, která mizí z paměti města. Příběhy, souvislosti, dokumentace a komunitní paměť." />
+      <meta name="twitter:image" content="https://memoriaeloci.cz/images/og/og-zapomenuta-mista-1200x630.jpg" />
+    </Fragment>
+  )}
   <Navigation />
   
   {project.slug === 'zapomenuta-mista-liberec' ? (
