@@ -17,24 +17,8 @@ const latestArticles = bombyArticle
   : allPublished.slice(0, 6);
 const featuredProjects = projects.slice(0, 4);
 
-// Get current date info
-const today = new Date();
-const dayOfMonth = today.getDate();
-const currentYear = today.getFullYear();
-
-// Get month name in Czech
-const monthNames = ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'];
-const currentMonth = monthNames[today.getMonth()].toUpperCase();
-
-// Generate 5 days around current day (2 before, current, 2 after)
-const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-const days = [];
-for (let i = -2; i <= 2; i++) {
-  const day = dayOfMonth + i;
-  if (day >= 1 && day <= daysInMonth) {
-    days.push(day);
-  }
-}
+// Kalendář na hero se vykresluje na klientu (client-side), aby vždy ukazoval aktuální datum
+// i na statickém hostingu (GitHub Pages) bez nutnosti nového buildu.
 ---
 
 <BaseLayout 
@@ -140,23 +124,35 @@ for (let i = -2; i <= 2; i++) {
             </h1>
           </div>
           
-          <!-- Right side - Date indicator -->
-          <div class="hidden lg:flex flex-col items-end space-y-4" style="margin-top: 20px;">
-            <div class="text-slate-300 text-xs uppercase tracking-wide">
-              {currentMonth} {currentYear}
-            </div>
-            <div class="text-slate-400 text-sm font-mono space-y-2">
-              {days.map((day) => {
-                const isActive = day === dayOfMonth;
-                return (
-                  <div class="flex items-center gap-3">
-                    <span class={isActive ? 'text-accent font-semibold' : ''}>{String(day).padStart(2, '0')}</span>
-                    <span class={`w-12 h-0.5 ${isActive ? 'bg-accent' : 'bg-slate-700'}`}></span>
-                  </div>
-                );
-              })}
-            </div>
+          <!-- Right side - Date indicator (vykresluje se na klientu, aby byl vždy aktuální) -->
+          <div id="hero-calendar" class="hidden lg:flex flex-col items-end space-y-4" style="margin-top: 20px;">
+            <div id="hero-calendar-month" class="text-slate-300 text-xs uppercase tracking-wide"></div>
+            <div id="hero-calendar-days" class="text-slate-400 text-sm font-mono space-y-2"></div>
           </div>
+          <script>
+            (function () {
+              const monthNames = ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'];
+              const today = new Date();
+              const dayOfMonth = today.getDate();
+              const currentYear = today.getFullYear();
+              const currentMonth = monthNames[today.getMonth()].toUpperCase();
+              const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+              const days = [];
+              for (let i = -2; i <= 2; i++) {
+                const day = dayOfMonth + i;
+                if (day >= 1 && day <= daysInMonth) days.push(day);
+              }
+              const monthEl = document.getElementById('hero-calendar-month');
+              const daysEl = document.getElementById('hero-calendar-days');
+              if (monthEl) monthEl.textContent = currentMonth + ' ' + currentYear;
+              if (daysEl) {
+                daysEl.innerHTML = days.map(function (day) {
+                  const isActive = day === dayOfMonth;
+                  return '<div class="flex items-center gap-3"><span class="' + (isActive ? 'text-accent font-semibold' : '') + '">' + String(day).padStart(2, '0') + '</span><span class="w-12 h-0.5 ' + (isActive ? 'bg-accent' : 'bg-slate-700') + '"></span></div>';
+                }).join('');
+              }
+            })();
+          </script>
         </div>
       </div>
     </div>
