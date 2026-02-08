@@ -9,19 +9,16 @@ author: "Mgr. Lukáš Koula"
 sources:
   - "KOULA Lukáš: Vznik a vývoj skautských organizací v Liberci a okolí od roku 1920 po současnost."
 cover:
-  src: "/images/liberec.png"
-  alt: "Liberec v mlze – paměť města"
+  src: "/images/skautsky-vedouci-charlie-archivni-fotografie.webp"
+  alt: "Archivní fotografie skautského vedoucího při praktickém výcviku s dětmi v přírodě."
 heroCaption: "Liberec, 1952 — paměť místa"
 youtubeId: "xb0x5_Z1asI"
 audioUrl: "/audio/pripad-tomsa-libereckych-skautu.m4a"
 infographic:
   src: "/images/casova-osa-perzekuce-skautu.webp"
   alt: "Infografika popisující časovou osu perzekuce libereckých skautů, včetně klíčových událostí a postav od roku 1948 do 1973."
-gallery:
-  - src: "/images/placeholder.svg"
-    alt: "Zástupný obrázek"
-  - src: "/images/kameny-zmizelych.webp"
-    alt: "Auschwitz – vstupní brána s nápisem ‚Arbeit macht frei‘"
+# Galerie v horní sekci u tohoto článku nezobrazovat
+gallery: []
 ---
 
 # Úvod

@@ -97,7 +97,7 @@ const ogImageUrl = ogImage ? new URL(toHttps(ogImage), Astro.site || 'https://me
       slot="hero"
       coverImage={article.coverImage}
       cover={article.cover}
-      gallery={article.gallery}
+      gallery={slug === 'politicky-proces-liberecke-skauty-1952' ? undefined : article.gallery}
       title={article.title}
       coverPosition={slug === 'kdyz-padaly-bomby-utikali-jsme-do-poli' ? 'top' : undefined}
     />
@@ -116,6 +116,11 @@ const ogImageUrl = ogImage ? new URL(toHttps(ogImage), Astro.site || 'https://me
     />
     
     <div slot="content" id="article-content" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+      {slug === 'politicky-proces-liberecke-skauty-1952' && (
+        <div class="max-w-7xl mx-auto mb-8 rounded-lg bg-white text-slate-800 px-6 py-4 text-center font-medium shadow-sm" role="status" aria-live="polite">
+          Článek se přepracovává
+        </div>
+      )}
       <article class="article-body prose prose-invert prose-xl max-w-7xl mx-auto
         prose-p:text-slate-200 prose-p:leading-relaxed prose-p:mb-8 prose-p:text-lg prose-p:text-justify
         prose-headings:font-serif prose-headings:text-slate-100 prose-headings:font-bold prose-headings:leading-tight
